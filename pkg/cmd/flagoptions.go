@@ -16,10 +16,10 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/stainless-sdks/public-sdk-cli/internal/apiform"
-	"github.com/stainless-sdks/public-sdk-cli/internal/apiquery"
-	"github.com/stainless-sdks/public-sdk-cli/internal/debugmiddleware"
-	"github.com/stainless-sdks/public-sdk-cli/internal/requestflag"
+	"github.com/channel3-ai/cli/internal/apiform"
+	"github.com/channel3-ai/cli/internal/apiquery"
+	"github.com/channel3-ai/cli/internal/debugmiddleware"
+	"github.com/channel3-ai/cli/internal/requestflag"
 	"github.com/stainless-sdks/public-sdk-go/option"
 
 	"github.com/goccy/go-yaml"

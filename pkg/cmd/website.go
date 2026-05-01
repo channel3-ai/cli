@@ -6,8 +6,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/stainless-sdks/public-sdk-cli/internal/apiquery"
-	"github.com/stainless-sdks/public-sdk-cli/internal/requestflag"
+	"github.com/channel3-ai/cli/internal/apiquery"
+	"github.com/channel3-ai/cli/internal/requestflag"
 	"github.com/stainless-sdks/public-sdk-go"
 	"github.com/stainless-sdks/public-sdk-go/option"
 	"github.com/tidwall/gjson"

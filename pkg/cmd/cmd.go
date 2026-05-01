@@ -12,8 +12,8 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/stainless-sdks/public-sdk-cli/internal/autocomplete"
-	"github.com/stainless-sdks/public-sdk-cli/internal/requestflag"
+	"github.com/channel3-ai/cli/internal/autocomplete"
+	"github.com/channel3-ai/cli/internal/requestflag"
 	docs "github.com/urfave/cli-docs/v3"
 	"github.com/urfave/cli/v3"
 )
