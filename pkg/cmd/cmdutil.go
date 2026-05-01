@@ -16,7 +16,7 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/stainless-sdks/public-sdk-cli/internal/jsonview"
+	"github.com/channel3-ai/cli/internal/jsonview"
 	"github.com/stainless-sdks/public-sdk-go/option"
 
 	"github.com/charmbracelet/x/term"

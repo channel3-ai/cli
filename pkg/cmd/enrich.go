@@ -6,8 +6,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/stainless-sdks/public-sdk-cli/internal/apiquery"
-	"github.com/stainless-sdks/public-sdk-cli/internal/requestflag"
+	"github.com/channel3-ai/cli/internal/apiquery"
+	"github.com/channel3-ai/cli/internal/requestflag"
 	"github.com/stainless-sdks/public-sdk-go"
 	"github.com/stainless-sdks/public-sdk-go/option"
 	"github.com/tidwall/gjson"
@@ -31,7 +31,7 @@ var enrichEnrichURL = cli.Command{
 }
 
 func handleEnrichEnrichURL(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -49,7 +49,7 @@ func handleEnrichEnrichURL(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.EnrichEnrichURLParams{}
+	params := channel3go.EnrichEnrichURLParams{}
 
 	var res []byte
 	options = append(options, option.WithResponseBodyInto(&res))

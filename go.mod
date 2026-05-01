@@ -1,4 +1,4 @@
-module github.com/stainless-sdks/public-sdk-cli
+module github.com/channel3-ai/cli
 
 go 1.25
 

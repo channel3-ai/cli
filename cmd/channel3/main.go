@@ -10,7 +10,7 @@ import (
 	"os"
 	"slices"
 
-	"github.com/stainless-sdks/public-sdk-cli/pkg/cmd"
+	"github.com/channel3-ai/cli/pkg/cmd"
 	"github.com/stainless-sdks/public-sdk-go"
 	"github.com/tidwall/gjson"
 	"github.com/urfave/cli/v3"
@@ -38,7 +38,7 @@ func main() {
 			exitCode = exitErr.ExitCode()
 		}
 
-		var apierr *publicsdk.Error
+		var apierr *channel3go.Error
 		if errors.As(err, &apierr) {
 			fmt.Fprintf(os.Stderr, "%s %q: %d %s\n", apierr.Request.Method, apierr.Request.URL, apierr.Response.StatusCode, http.StatusText(apierr.Response.StatusCode))
 			format := app.String("format-error")

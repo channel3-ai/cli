@@ -5,8 +5,8 @@ package cmd
 import (
 	"testing"
 
-	"github.com/stainless-sdks/public-sdk-cli/internal/mocktest"
-	"github.com/stainless-sdks/public-sdk-cli/internal/requestflag"
+	"github.com/channel3-ai/cli/internal/mocktest"
+	"github.com/channel3-ai/cli/internal/requestflag"
 )
 
 func TestSearchPerform(t *testing.T) {

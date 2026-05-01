@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -exuo pipefail
 
-BINARY_NAME="public-sdk"
+BINARY_NAME="channel3"
 DIST_DIR="dist"
 FILENAME="dist.zip"
 
