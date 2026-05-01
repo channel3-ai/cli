@@ -119,12 +119,12 @@ var searchPerform = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.exclude-website-ids",
-			Usage:      "If provided, products from these websites will be excluded from the results",
+			Usage:      `If provided, products from these websites will be excluded from the results. Accepts website IDs or domains (e.g. "nike.com").`,
 			InnerField: "exclude_website_ids",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.gender",
-			Usage:      `Allowed values: "male", "female", "unisex".`,
+			Usage:      `Allowed values: "male", "female".`,
 			InnerField: "gender",
 		},
 		&requestflag.InnerFlag[map[string]any]{
@@ -134,14 +134,14 @@ var searchPerform = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.website-ids",
-			Usage:      "If provided, only products from these websites will be returned",
+			Usage:      `If provided, only products from these websites will be returned. Accepts website IDs or domains (e.g. "nike.com").`,
 			InnerField: "website_ids",
 		},
 	},
 })
 
 func handleSearchPerform(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -159,7 +159,7 @@ func handleSearchPerform(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.SearchPerformParams{}
+	params := channel3go.SearchPerformParams{}
 
 	var res []byte
 	options = append(options, option.WithResponseBodyInto(&res))

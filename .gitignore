@@ -1,5 +1,5 @@
 .prism.log
 .stdy.log
 dist/
-/public-sdk
+/channel3
 *.exe

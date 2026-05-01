@@ -41,7 +41,7 @@ var productsRetrieve = cli.Command{
 		},
 		&requestflag.Flag[any]{
 			Name:      "website-id",
-			Usage:     "Optional list of website IDs to constrain the buy URL to, relevant if multiple merchants exist",
+			Usage:     `Optional list of website IDs to constrain the buy URL to, relevant if multiple merchants exist. Accepts website IDs or domains (e.g. "nike.com").`,
 			QueryPath: "website_ids",
 		},
 	},
@@ -144,12 +144,12 @@ var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.exclude-website-ids",
-			Usage:      "If provided, products from these websites will be excluded from the results",
+			Usage:      `If provided, products from these websites will be excluded from the results. Accepts website IDs or domains (e.g. "nike.com").`,
 			InnerField: "exclude_website_ids",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.gender",
-			Usage:      `Allowed values: "male", "female", "unisex".`,
+			Usage:      `Allowed values: "male", "female".`,
 			InnerField: "gender",
 		},
 		&requestflag.InnerFlag[map[string]any]{
@@ -159,7 +159,7 @@ var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.website-ids",
-			Usage:      "If provided, only products from these websites will be returned",
+			Usage:      `If provided, only products from these websites will be returned. Accepts website IDs or domains (e.g. "nike.com").`,
 			InnerField: "website_ids",
 		},
 	},
@@ -296,12 +296,12 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.exclude-website-ids",
-			Usage:      "If provided, products from these websites will be excluded from the results",
+			Usage:      `If provided, products from these websites will be excluded from the results. Accepts website IDs or domains (e.g. "nike.com").`,
 			InnerField: "exclude_website_ids",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.gender",
-			Usage:      `Allowed values: "male", "female", "unisex".`,
+			Usage:      `Allowed values: "male", "female".`,
 			InnerField: "gender",
 		},
 		&requestflag.InnerFlag[map[string]any]{
@@ -311,7 +311,7 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.website-ids",
-			Usage:      "If provided, only products from these websites will be returned",
+			Usage:      `If provided, only products from these websites will be returned. Accepts website IDs or domains (e.g. "nike.com").`,
 			InnerField: "website_ids",
 		},
 	},
@@ -416,12 +416,12 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.exclude-website-ids",
-			Usage:      "If provided, products from these websites will be excluded from the results",
+			Usage:      `If provided, products from these websites will be excluded from the results. Accepts website IDs or domains (e.g. "nike.com").`,
 			InnerField: "exclude_website_ids",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.gender",
-			Usage:      `Allowed values: "male", "female", "unisex".`,
+			Usage:      `Allowed values: "male", "female".`,
 			InnerField: "gender",
 		},
 		&requestflag.InnerFlag[map[string]any]{
@@ -431,14 +431,14 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.website-ids",
-			Usage:      "If provided, only products from these websites will be returned",
+			Usage:      `If provided, only products from these websites will be returned. Accepts website IDs or domains (e.g. "nike.com").`,
 			InnerField: "website_ids",
 		},
 	},
 })
 
 func handleProductsRetrieve(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 	if !cmd.IsSet("product-id") && len(unusedArgs) > 0 {
 		cmd.Set("product-id", unusedArgs[0])
@@ -459,7 +459,7 @@ func handleProductsRetrieve(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.ProductGetParams{}
+	params := channel3go.ProductGetParams{}
 
 	var res []byte
 	options = append(options, option.WithResponseBodyInto(&res))
@@ -487,7 +487,7 @@ func handleProductsRetrieve(ctx context.Context, cmd *cli.Command) error {
 }
 
 func handleProductsFindSimilar(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -505,7 +505,7 @@ func handleProductsFindSimilar(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.ProductFindSimilarParams{}
+	params := channel3go.ProductFindSimilarParams{}
 
 	format := cmd.Root().String("format")
 	explicitFormat := cmd.Root().IsSet("format")
@@ -542,7 +542,7 @@ func handleProductsFindSimilar(ctx context.Context, cmd *cli.Command) error {
 }
 
 func handleProductsLookup(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -560,7 +560,7 @@ func handleProductsLookup(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.ProductLookupParams{}
+	params := channel3go.ProductLookupParams{}
 
 	var res []byte
 	options = append(options, option.WithResponseBodyInto(&res))
@@ -583,7 +583,7 @@ func handleProductsLookup(ctx context.Context, cmd *cli.Command) error {
 }
 
 func handleProductsSearch(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -601,7 +601,7 @@ func handleProductsSearch(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.ProductSearchParams{}
+	params := channel3go.ProductSearchParams{}
 
 	format := cmd.Root().String("format")
 	explicitFormat := cmd.Root().IsSet("format")
@@ -638,7 +638,7 @@ func handleProductsSearch(ctx context.Context, cmd *cli.Command) error {
 }
 
 func handleProductsSearchByImage(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -656,7 +656,7 @@ func handleProductsSearchByImage(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.ProductSearchByImageParams{}
+	params := channel3go.ProductSearchByImageParams{}
 
 	format := cmd.Root().String("format")
 	explicitFormat := cmd.Root().IsSet("format")

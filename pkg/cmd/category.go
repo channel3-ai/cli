@@ -84,7 +84,7 @@ var categoriesSearch = cli.Command{
 }
 
 func handleCategoriesRetrieve(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 	if !cmd.IsSet("slug") && len(unusedArgs) > 0 {
 		cmd.Set("slug", unusedArgs[0])
@@ -126,7 +126,7 @@ func handleCategoriesRetrieve(ctx context.Context, cmd *cli.Command) error {
 }
 
 func handleCategoriesList(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -144,7 +144,7 @@ func handleCategoriesList(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.CategoryListParams{}
+	params := channel3go.CategoryListParams{}
 
 	format := cmd.Root().String("format")
 	explicitFormat := cmd.Root().IsSet("format")
@@ -181,7 +181,7 @@ func handleCategoriesList(ctx context.Context, cmd *cli.Command) error {
 }
 
 func handleCategoriesSearch(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -199,7 +199,7 @@ func handleCategoriesSearch(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.CategorySearchParams{}
+	params := channel3go.CategorySearchParams{}
 
 	var res []byte
 	options = append(options, option.WithResponseBodyInto(&res))

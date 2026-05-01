@@ -1,20 +1,20 @@
-project_name: public-sdk
+project_name: channel3
 version: 2
 
 before:
   hooks:
     - mkdir -p completions
-    - sh -c "go run ./cmd/public-sdk/main.go @completion bash > completions/public-sdk.bash"
-    - sh -c "go run ./cmd/public-sdk/main.go @completion zsh > completions/public-sdk.zsh"
-    - sh -c "go run ./cmd/public-sdk/main.go @completion fish > completions/public-sdk.fish"
-    - sh -c "go run ./cmd/public-sdk/main.go @manpages -o man"
+    - sh -c "go run ./cmd/channel3/main.go @completion bash > completions/channel3.bash"
+    - sh -c "go run ./cmd/channel3/main.go @completion zsh > completions/channel3.zsh"
+    - sh -c "go run ./cmd/channel3/main.go @completion fish > completions/channel3.fish"
+    - sh -c "go run ./cmd/channel3/main.go @manpages -o man"
 
 builds:
   - id: macos
     goos: [darwin]
     goarch: [amd64, arm64]
     binary: '{{ .ProjectName }}'
-    main: ./cmd/public-sdk/main.go
+    main: ./cmd/channel3/main.go
     mod_timestamp: '{{ .CommitTimestamp }}'
     ldflags:
       - '-s -w -X main.version={{.Version}} -X main.commit={{.Commit}}'
@@ -25,7 +25,7 @@ builds:
     env:
       - CGO_ENABLED=0
     binary: '{{ .ProjectName }}'
-    main: ./cmd/public-sdk/main.go
+    main: ./cmd/channel3/main.go
     mod_timestamp: '{{ .CommitTimestamp }}'
     ldflags:
       - '-s -w -X main.version={{.Version}} -X main.commit={{.Commit}}'
@@ -34,7 +34,7 @@ builds:
     goos: [windows]
     goarch: ['386', amd64, arm64]
     binary: '{{ .ProjectName }}'
-    main: ./cmd/public-sdk/main.go
+    main: ./cmd/channel3/main.go
     mod_timestamp: '{{ .CommitTimestamp }}'
     ldflags:
       - '-s -w -X main.version={{.Version}} -X main.commit={{.Commit}}'
