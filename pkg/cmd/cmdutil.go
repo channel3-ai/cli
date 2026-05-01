@@ -17,7 +17,7 @@ import (
 	"syscall"
 
 	"github.com/channel3-ai/cli/internal/jsonview"
-	"github.com/stainless-sdks/public-sdk-go/option"
+	"github.com/channel3-ai/sdk-go/option"
 
 	"github.com/charmbracelet/x/term"
 	"github.com/itchyny/json2yaml"

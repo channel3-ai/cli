@@ -15,7 +15,7 @@ on:
       - 'stl-preview-base/**'
 
 env:
-  GOPRIVATE: github.com/stainless-sdks/public-sdk-go
+  GOPRIVATE: github.com/channel3-ai/sdk-go,github.com/stainless-sdks/public-sdk-go
 
 jobs:
   lint:

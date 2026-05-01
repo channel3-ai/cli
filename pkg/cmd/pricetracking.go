@@ -8,8 +8,8 @@ import (
 
 	"github.com/channel3-ai/cli/internal/apiquery"
 	"github.com/channel3-ai/cli/internal/requestflag"
-	"github.com/stainless-sdks/public-sdk-go"
-	"github.com/stainless-sdks/public-sdk-go/option"
+	"github.com/channel3-ai/sdk-go"
+	"github.com/channel3-ai/sdk-go/option"
 	"github.com/tidwall/gjson"
 	"github.com/urfave/cli/v3"
 )
