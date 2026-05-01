@@ -20,7 +20,7 @@ import (
 	"github.com/channel3-ai/cli/internal/apiquery"
 	"github.com/channel3-ai/cli/internal/debugmiddleware"
 	"github.com/channel3-ai/cli/internal/requestflag"
-	"github.com/stainless-sdks/public-sdk-go/option"
+	"github.com/channel3-ai/sdk-go/option"
 
 	"github.com/goccy/go-yaml"
 	"github.com/urfave/cli/v3"

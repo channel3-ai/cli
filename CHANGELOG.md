@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.0 (2026-05-01)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/channel3-ai/cli/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* Set up Go SDK to back our CLI ([5f956e5](https://github.com/channel3-ai/cli/commit/5f956e575ad0db59889b14b3be4d3cea799094c2))
+
+
+### Chores
+
+* **internal:** add Homebrew tap distribution support ([023a357](https://github.com/channel3-ai/cli/commit/023a35700e91df6ae832e19335b2f06588fcef7e))
+* update SDK settings ([e34810f](https://github.com/channel3-ai/cli/commit/e34810f220cba6250dcc5fc7c6d9181fa50506a5))
+
 ## 0.1.0 (2026-05-01)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/channel3-ai/cli/compare/v0.0.1...v0.1.0)

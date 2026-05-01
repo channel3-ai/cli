@@ -78,3 +78,19 @@ nfpms:
     contents:
       - src: man/man1/*.1.gz
         dst: /usr/share/man/man1/
+homebrew_casks:
+  - name: channel3
+    repository:
+      owner: channel3-ai
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    homepage: https://docs.trychannel3.com
+    description: The official CLI of Channel3
+    license: Apache-2.0
+    binary: "channel3"
+    completions:
+      bash: "completions/channel3.bash"
+      zsh: "completions/channel3.zsh"
+      fish: "completions/channel3.fish"
+    manpages:
+    - man/man1/channel3.1.gz
