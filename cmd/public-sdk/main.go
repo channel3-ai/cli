@@ -10,7 +10,7 @@ import (
 	"os"
 	"slices"
 
-	"github.com/stainless-sdks/public-sdk-cli/pkg/cmd"
+	"github.com/channel3-ai/cli/pkg/cmd"
 	"github.com/stainless-sdks/public-sdk-go"
 	"github.com/tidwall/gjson"
 	"github.com/urfave/cli/v3"
