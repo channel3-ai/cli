@@ -16,7 +16,7 @@ import (
 
 var websitesRetrieve = cli.Command{
 	Name:    "retrieve",
-	Usage:   "Find a website by URL.",
+	Usage:   "Resolve a website URL to its ID and best_commission_rate. Tip: website_ids\nfilters accept domains directly, so this lookup is most useful for retrieving\ncommission rates.",
 	Suggest: true,
 	Flags: []cli.Flag{
 		&requestflag.Flag[string]{
@@ -30,7 +30,7 @@ var websitesRetrieve = cli.Command{
 }
 
 func handleWebsitesRetrieve(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -48,7 +48,7 @@ func handleWebsitesRetrieve(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.WebsiteGetParams{}
+	params := channel3go.WebsiteGetParams{}
 
 	var res []byte
 	options = append(options, option.WithResponseBodyInto(&res))

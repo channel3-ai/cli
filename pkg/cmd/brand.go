@@ -92,7 +92,7 @@ var brandsSearch = cli.Command{
 }
 
 func handleBrandsRetrieve(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 	if !cmd.IsSet("brand-id") && len(unusedArgs) > 0 {
 		cmd.Set("brand-id", unusedArgs[0])
@@ -134,7 +134,7 @@ func handleBrandsRetrieve(ctx context.Context, cmd *cli.Command) error {
 }
 
 func handleBrandsList(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -152,7 +152,7 @@ func handleBrandsList(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.BrandListParams{}
+	params := channel3go.BrandListParams{}
 
 	format := cmd.Root().String("format")
 	explicitFormat := cmd.Root().IsSet("format")
@@ -189,7 +189,7 @@ func handleBrandsList(ctx context.Context, cmd *cli.Command) error {
 }
 
 func handleBrandsFind(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -207,7 +207,7 @@ func handleBrandsFind(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.BrandFindParams{}
+	params := channel3go.BrandFindParams{}
 
 	var res []byte
 	options = append(options, option.WithResponseBodyInto(&res))
@@ -230,7 +230,7 @@ func handleBrandsFind(ctx context.Context, cmd *cli.Command) error {
 }
 
 func handleBrandsSearch(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -248,7 +248,7 @@ func handleBrandsSearch(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.BrandSearchParams{}
+	params := channel3go.BrandSearchParams{}
 
 	var res []byte
 	options = append(options, option.WithResponseBodyInto(&res))

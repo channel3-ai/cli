@@ -25,7 +25,7 @@ var (
 
 func init() {
 	Command = &cli.Command{
-		Name:      "public-sdk",
+		Name:      "channel3",
 		Usage:     "CLI for the channel3 API",
 		Suggest:   true,
 		Version:   Version,
@@ -170,7 +170,7 @@ func init() {
 			{
 				Name:            "@manpages",
 				Usage:           "Generate documentation for 'man'",
-				UsageText:       "public-sdk @manpages [-o public-sdk.1] [--gzip]",
+				UsageText:       "channel3 @manpages [-o channel3.1] [--gzip]",
 				Hidden:          true,
 				Action:          generateManpages,
 				HideHelpCommand: true,
@@ -223,7 +223,7 @@ func generateManpages(ctx context.Context, c *cli.Command) error {
 		// handle error
 	}
 	if c.Bool("text") {
-		file, err := os.Create(filepath.Join(dir, "man1", "public-sdk.1"))
+		file, err := os.Create(filepath.Join(dir, "man1", "channel3.1"))
 		if err != nil {
 			return err
 		}
@@ -233,7 +233,7 @@ func generateManpages(ctx context.Context, c *cli.Command) error {
 		}
 	}
 	if c.Bool("gzip") {
-		file, err := os.Create(filepath.Join(dir, "man1", "public-sdk.1.gz"))
+		file, err := os.Create(filepath.Join(dir, "man1", "channel3.1.gz"))
 		if err != nil {
 			return err
 		}

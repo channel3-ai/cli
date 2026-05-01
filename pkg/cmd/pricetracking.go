@@ -91,7 +91,7 @@ var priceTrackingStop = cli.Command{
 }
 
 func handlePriceTrackingListSubscriptions(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -109,7 +109,7 @@ func handlePriceTrackingListSubscriptions(ctx context.Context, cmd *cli.Command)
 		return err
 	}
 
-	params := publicsdk.PriceTrackingListSubscriptionsParams{}
+	params := channel3go.PriceTrackingListSubscriptionsParams{}
 
 	format := cmd.Root().String("format")
 	explicitFormat := cmd.Root().IsSet("format")
@@ -146,7 +146,7 @@ func handlePriceTrackingListSubscriptions(ctx context.Context, cmd *cli.Command)
 }
 
 func handlePriceTrackingRetrieveHistory(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 	if !cmd.IsSet("canonical-product-id") && len(unusedArgs) > 0 {
 		cmd.Set("canonical-product-id", unusedArgs[0])
@@ -167,7 +167,7 @@ func handlePriceTrackingRetrieveHistory(ctx context.Context, cmd *cli.Command) e
 		return err
 	}
 
-	params := publicsdk.PriceTrackingGetHistoryParams{}
+	params := channel3go.PriceTrackingGetHistoryParams{}
 
 	var res []byte
 	options = append(options, option.WithResponseBodyInto(&res))
@@ -195,7 +195,7 @@ func handlePriceTrackingRetrieveHistory(ctx context.Context, cmd *cli.Command) e
 }
 
 func handlePriceTrackingStart(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -213,7 +213,7 @@ func handlePriceTrackingStart(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.PriceTrackingStartParams{}
+	params := channel3go.PriceTrackingStartParams{}
 
 	var res []byte
 	options = append(options, option.WithResponseBodyInto(&res))
@@ -236,7 +236,7 @@ func handlePriceTrackingStart(ctx context.Context, cmd *cli.Command) error {
 }
 
 func handlePriceTrackingStop(ctx context.Context, cmd *cli.Command) error {
-	client := publicsdk.NewClient(getDefaultRequestOptions(cmd)...)
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
 	unusedArgs := cmd.Args().Slice()
 
 	if len(unusedArgs) > 0 {
@@ -254,7 +254,7 @@ func handlePriceTrackingStop(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
-	params := publicsdk.PriceTrackingStopParams{}
+	params := channel3go.PriceTrackingStopParams{}
 
 	var res []byte
 	options = append(options, option.WithResponseBodyInto(&res))

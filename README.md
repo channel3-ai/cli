@@ -13,7 +13,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 To test or install the CLI locally, you need [Go](https://go.dev/doc/install) version 1.22 or later installed.
 
 ```sh
-go install 'github.com/channel3-ai/cli/cmd/public-sdk@latest'
+go install 'github.com/channel3-ai/cli/cmd/channel3@latest'
 ```
 
 Once you have run `go install`, the binary is placed in your Go bin directory:
@@ -44,11 +44,11 @@ After cloning the git repository for this project, you can use the
 The CLI follows a resource-based command structure:
 
 ```sh
-public-sdk [resource] <command> [flags...]
+channel3 [resource] <command> [flags...]
 ```
 
 ```sh
-public-sdk products search \
+channel3 products search \
   --api-key 'My API Key'
 ```
 
@@ -83,15 +83,15 @@ For details about specific commands, use the `--help` flag.
 To pass files to your API, you can use the `@myfile.ext` syntax:
 
 ```bash
-public-sdk <command> --arg @abe.jpg
+channel3 <command> --arg @abe.jpg
 ```
 
 Files can also be passed inside JSON or YAML blobs:
 
 ```bash
-public-sdk <command> --arg '{image: "@abe.jpg"}'
+channel3 <command> --arg '{image: "@abe.jpg"}'
 # Equivalent:
-public-sdk <command> <<YAML
+channel3 <command> <<YAML
 arg:
   image: "@abe.jpg"
 YAML
@@ -101,7 +101,7 @@ If you need to pass a string literal that begins with an `@` sign, you can
 escape the `@` sign to avoid accidentally passing a file.
 
 ```bash
-public-sdk <command> --username '\@abe'
+channel3 <command> --username '\@abe'
 ```
 
 #### Explicit encoding
@@ -115,7 +115,7 @@ base64-encoding). Note that absolute paths will begin with `@file://` or
 `@data://`, followed by a third `/` (for example, `@file:///tmp/file.txt`).
 
 ```bash
-public-sdk <command> --arg @data://file.txt
+channel3 <command> --arg @data://file.txt
 ```
 
 ## Linking different Go SDK versions
@@ -133,7 +133,7 @@ git tag, or commit hash):
 To link to a local copy of the SDK:
 
 ```bash
-./scripts/link ../path/to/publicsdk-go
+./scripts/link ../path/to/channel3go-go
 ```
 
-If you run the link script without any arguments, it will default to `../publicsdk-go`.
+If you run the link script without any arguments, it will default to `../channel3go-go`.
