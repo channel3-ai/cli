@@ -11,7 +11,7 @@ import (
 	"slices"
 
 	"github.com/channel3-ai/cli/pkg/cmd"
-	"github.com/stainless-sdks/public-sdk-go"
+	"github.com/channel3-ai/sdk-go"
 	"github.com/tidwall/gjson"
 	"github.com/urfave/cli/v3"
 )
