@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.3.0 (2026-05-15)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/channel3-ai/cli/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* Omit 'get' aliases from Go SDK ([bca22c5](https://github.com/channel3-ai/cli/commit/bca22c52e6721b70c6c520bdc8e61e392b516f3c))
+
+
+### Chores
+
+* redact api-key headers in debug logs ([b65f188](https://github.com/channel3-ai/cli/commit/b65f1883e3658bdee3202a483d6fe0e49a4777af))
+* update SDK settings ([da3364c](https://github.com/channel3-ai/cli/commit/da3364cb5efe06d0e3200bce3e2306a95917c571))
+
 ## 0.2.0 (2026-05-01)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/channel3-ai/cli/compare/v0.1.0...v0.2.0)
