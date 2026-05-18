@@ -3,3 +3,5 @@
 dist/
 /channel3
 *.exe
+*.p12
+*.p8
