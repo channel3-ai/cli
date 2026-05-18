@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 (2026-05-18)
+
+Full Changelog: [v0.3.0...v0.3.1](https://github.com/channel3-ai/cli/compare/v0.3.0...v0.3.1)
+
 ## 0.3.0 (2026-05-15)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/channel3-ai/cli/compare/v0.2.0...v0.3.0)
