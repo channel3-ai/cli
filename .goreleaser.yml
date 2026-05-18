@@ -84,6 +84,10 @@ homebrew_casks:
       owner: channel3-ai
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+      pull_request:
+        enabled: true
+        base:
+          branch: main
     homepage: https://docs.trychannel3.com
     description: The official CLI of Channel3
     license: Apache-2.0
