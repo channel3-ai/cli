@@ -31,7 +31,7 @@ var brandsRetrieve = cli.Command{
 
 var brandsList = cli.Command{
 	Name:    "list",
-	Usage:   "Paginated list of brands.",
+	Usage:   "Paginated list of brands, capped at the top 5,000.",
 	Suggest: true,
 	Flags: []cli.Flag{
 		&requestflag.Flag[*string]{

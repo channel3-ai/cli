@@ -112,6 +112,11 @@ var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "Filter by age group. Age-agnostic products are treated as adult products.",
 			InnerField: "age",
 		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.attributes",
+			Usage:      "If provided, only products whose extracted attributes match these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys/values per category.",
+			InnerField: "attributes",
+		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.availability",
 			Usage:      "If provided, only products with these availability statuses will be returned",
@@ -126,6 +131,11 @@ var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 			Name:       "filters.category-ids",
 			Usage:      "If provided, only products from these categories will be returned. Accepts category slugs.",
 			InnerField: "category_ids",
+		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.colors",
+			Usage:      "[Beta] Color filter wrapper. Holds the list of required colors today;\nreserved for future filter-level options (e.g. match modes, tolerance overrides).",
+			InnerField: "colors",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.condition",
@@ -264,6 +274,11 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "Filter by age group. Age-agnostic products are treated as adult products.",
 			InnerField: "age",
 		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.attributes",
+			Usage:      "If provided, only products whose extracted attributes match these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys/values per category.",
+			InnerField: "attributes",
+		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.availability",
 			Usage:      "If provided, only products with these availability statuses will be returned",
@@ -278,6 +293,11 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 			Name:       "filters.category-ids",
 			Usage:      "If provided, only products from these categories will be returned. Accepts category slugs.",
 			InnerField: "category_ids",
+		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.colors",
+			Usage:      "[Beta] Color filter wrapper. Holds the list of required colors today;\nreserved for future filter-level options (e.g. match modes, tolerance overrides).",
+			InnerField: "colors",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.condition",
@@ -384,6 +404,11 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "Filter by age group. Age-agnostic products are treated as adult products.",
 			InnerField: "age",
 		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.attributes",
+			Usage:      "If provided, only products whose extracted attributes match these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys/values per category.",
+			InnerField: "attributes",
+		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.availability",
 			Usage:      "If provided, only products with these availability statuses will be returned",
@@ -398,6 +423,11 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 			Name:       "filters.category-ids",
 			Usage:      "If provided, only products from these categories will be returned. Accepts category slugs.",
 			InnerField: "category_ids",
+		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.colors",
+			Usage:      "[Beta] Color filter wrapper. Holds the list of required colors today;\nreserved for future filter-level options (e.g. match modes, tolerance overrides).",
+			InnerField: "colors",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.condition",
