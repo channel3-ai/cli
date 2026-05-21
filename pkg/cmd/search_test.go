@@ -18,7 +18,7 @@ func TestSearchPerform(t *testing.T) {
 			"search", "perform",
 			"--base64-image", "base64_image",
 			"--config", "{country: US, currency: USD, keyword_search_only: true, language: en}",
-			"--filters", "{age: [newborn], availability: [InStock], brand_ids: [string], category_ids: [string], condition: new, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, website_ids: [string]}",
+			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}]}, condition: new, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, website_ids: [string]}",
 			"--image-url", "image_url",
 			"--limit", "1",
 			"--page-token", "page_token",
@@ -41,9 +41,11 @@ func TestSearchPerform(t *testing.T) {
 			"--config.keyword-search-only=true",
 			"--config.language", "en",
 			"--filters.age", "[newborn]",
+			"--filters.attributes", "{foo: [string]}",
 			"--filters.availability", "[InStock]",
 			"--filters.brand-ids", "[string]",
 			"--filters.category-ids", "[string]",
+			"--filters.colors", "{palette: [{hex: hex, percentage: 0}]}",
 			"--filters.condition", "new",
 			"--filters.exclude-brand-ids", "[string]",
 			"--filters.exclude-category-ids", "[string]",
@@ -70,12 +72,19 @@ func TestSearchPerform(t *testing.T) {
 			"filters:\n" +
 			"  age:\n" +
 			"    - newborn\n" +
+			"  attributes:\n" +
+			"    foo:\n" +
+			"      - string\n" +
 			"  availability:\n" +
 			"    - InStock\n" +
 			"  brand_ids:\n" +
 			"    - string\n" +
 			"  category_ids:\n" +
 			"    - string\n" +
+			"  colors:\n" +
+			"    palette:\n" +
+			"      - hex: hex\n" +
+			"        percentage: 0\n" +
 			"  condition: new\n" +
 			"  exclude_brand_ids:\n" +
 			"    - string\n" +
