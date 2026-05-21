@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 (2026-05-21)
+
+Full Changelog: [v0.3.1...v0.4.0](https://github.com/channel3-ai/cli/compare/v0.3.1...v0.4.0)
+
+### Features
+
+* **api:** add attributes filter parameter to products/search methods ([b35ff65](https://github.com/channel3-ai/cli/commit/b35ff6553f9d2a8877932d7b39a3ba87b52f8ba4))
+
+
+### Bug Fixes
+
+* set feature branch for homebrew cask PR ([792da6e](https://github.com/channel3-ai/cli/commit/792da6ea7a1cd84fbe24e0eb5c664e3025292849))
+
 ## 0.3.1 (2026-05-18)
 
 Full Changelog: [v0.3.0...v0.3.1](https://github.com/channel3-ai/cli/compare/v0.3.0...v0.3.1)
