@@ -14,6 +14,12 @@ It is generated with [Stainless](https://www.stainless.com/).
 brew install channel3-ai/tap/channel3
 ```
 
+To upgrade to the latest version:
+
+```sh
+brew upgrade channel3
+```
+
 ### Installing with Go
 
 To test or install the CLI locally, you need [Go](https://go.dev/doc/install) version 1.22 or later installed.
