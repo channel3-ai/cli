@@ -3,7 +3,7 @@ module github.com/channel3-ai/cli
 go 1.25
 
 require (
-	github.com/channel3-ai/sdk-go v0.3.0
+	github.com/channel3-ai/sdk-go v0.4.0
 	github.com/charmbracelet/bubbles v0.21.0
 	github.com/charmbracelet/bubbletea v1.3.6
 	github.com/charmbracelet/lipgloss v1.1.0
