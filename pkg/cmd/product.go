@@ -204,7 +204,7 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 	Flags: []cli.Flag{
 		&requestflag.Flag[*string]{
 			Name:     "base64-image",
-			Usage:    "Base64 encoded image. At least one of `query`, `image_url`, or `base64_image` must be provided.",
+			Usage:    "Base64 encoded image. At least one of `query`, `image_url`, `base64_image`, or `page_token` must be provided.",
 			BodyPath: "base64_image",
 		},
 		&requestflag.Flag[map[string]any]{
@@ -219,7 +219,7 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.Flag[*string]{
 			Name:     "image-url",
-			Usage:    "Image URL. At least one of `query`, `image_url`, or `base64_image` must be provided.",
+			Usage:    "Image URL. At least one of `query`, `image_url`, `base64_image`, or `page_token` must be provided.",
 			BodyPath: "image_url",
 		},
 		&requestflag.Flag[*int64]{
@@ -235,7 +235,7 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.Flag[*string]{
 			Name:     "query",
-			Usage:    "Search query. At least one of `query`, `image_url`, or `base64_image` must be provided.",
+			Usage:    "Search query. At least one of `query`, `image_url`, `base64_image`, or `page_token` must be provided.",
 			BodyPath: "query",
 		},
 		&requestflag.Flag[int64]{
