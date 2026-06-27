@@ -167,6 +167,11 @@ var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "Price filter for search. Values are inclusive.",
 			InnerField: "price",
 		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "filters.sale",
+			Usage:      "If 'on_sale', only products with at least one on-sale offer (priced below its compare-at price) for the requested locale are returned. If omitted, no filter.",
+			InnerField: "sale",
+		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.website-ids",
 			Usage:      `If provided, only products from these websites will be returned. Accepts website IDs or domains (e.g. "nike.com").`,
@@ -329,6 +334,11 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "Price filter for search. Values are inclusive.",
 			InnerField: "price",
 		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "filters.sale",
+			Usage:      "If 'on_sale', only products with at least one on-sale offer (priced below its compare-at price) for the requested locale are returned. If omitted, no filter.",
+			InnerField: "sale",
+		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.website-ids",
 			Usage:      `If provided, only products from these websites will be returned. Accepts website IDs or domains (e.g. "nike.com").`,
@@ -372,6 +382,11 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 			Name:     "page-token",
 			Usage:    "Opaque token from a previous image-search response to fetch the next page of results.",
 			BodyPath: "page_token",
+		},
+		&requestflag.Flag[*string]{
+			Name:     "segment",
+			Usage:    `Image segmentation mode. None (default) disables segmentation. "AUTO" segments and crops the main product automatically. A custom string (e.g. "shoe", "mug") segments the specified object.`,
+			BodyPath: "segment",
 		},
 		&requestflag.Flag[int64]{
 			Name:  "max-items",
@@ -458,6 +473,11 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 			Name:       "filters.price",
 			Usage:      "Price filter for search. Values are inclusive.",
 			InnerField: "price",
+		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "filters.sale",
+			Usage:      "If 'on_sale', only products with at least one on-sale offer (priced below its compare-at price) for the requested locale are returned. If omitted, no filter.",
+			InnerField: "sale",
 		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.website-ids",

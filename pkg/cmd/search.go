@@ -142,6 +142,11 @@ var searchPerform = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "Price filter for search. Values are inclusive.",
 			InnerField: "price",
 		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "filters.sale",
+			Usage:      "If 'on_sale', only products with at least one on-sale offer (priced below its compare-at price) for the requested locale are returned. If omitted, no filter.",
+			InnerField: "sale",
+		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.website-ids",
 			Usage:      `If provided, only products from these websites will be returned. Accepts website IDs or domains (e.g. "nike.com").`,
