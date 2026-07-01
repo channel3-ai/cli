@@ -72,13 +72,18 @@ var searchPerform = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[bool]{
 			Name:       "config.keyword-search-only",
-			Usage:      "If True, search will only use keyword search and not vector search. Keyword-only search is not supported with image input.",
+			Usage:      "Deprecated: use `mode`. `true` is equivalent to `mode=keyword`. ",
 			InnerField: "keyword_search_only",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "config.language",
 			Usage:      "ISO 639-1 language code. When unset, inferred from ``country`` (preferred) then ``currency``, defaulting to ``en``.",
 			InnerField: "language",
+		},
+		&requestflag.InnerFlag[string]{
+			Name:       "config.mode",
+			Usage:      "Search strategy. `default` (recommended) combines lexical + semantic search and is right for most use cases. `keyword` is lexical only — use it for real-time, low-latency needs like ad targeting. `agentic` uses an LLM to plan multiple structured sub-searches for complex queries, with higher latency than the other modes.",
+			InnerField: "mode",
 		},
 	},
 	"filters": {
