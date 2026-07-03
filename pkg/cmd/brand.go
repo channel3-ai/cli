@@ -24,6 +24,11 @@ var brandsRetrieve = cli.Command{
 			Required:  true,
 			PathParam: "brand_id",
 		},
+		&requestflag.Flag[*string]{
+			Name:      "country",
+			Usage:     "ISO 3166-1 alpha-2 country code that `best_commission_rate` is scoped to. Defaults to 'US' when unset.",
+			QueryPath: "country",
+		},
 	},
 	Action:          handleBrandsRetrieve,
 	HideHelpCommand: true,
@@ -34,6 +39,11 @@ var brandsList = cli.Command{
 	Usage:   "Paginated list of brands, capped at the top 5,000.",
 	Suggest: true,
 	Flags: []cli.Flag{
+		&requestflag.Flag[*string]{
+			Name:      "country",
+			Usage:     "ISO 3166-1 alpha-2 country code that `best_commission_rate` is scoped to. Defaults to 'US' when unset.",
+			QueryPath: "country",
+		},
 		&requestflag.Flag[*string]{
 			Name:      "cursor",
 			Usage:     "Pagination cursor returned by a prior call. Omit for the first page.",
@@ -80,6 +90,11 @@ var brandsSearch = cli.Command{
 			Required:  true,
 			QueryPath: "query",
 		},
+		&requestflag.Flag[*string]{
+			Name:      "country",
+			Usage:     "ISO 3166-1 alpha-2 country code that `best_commission_rate` is scoped to. Defaults to 'US' when unset.",
+			QueryPath: "country",
+		},
 		&requestflag.Flag[int64]{
 			Name:      "limit",
 			Usage:     "Maximum number of brands to return.",
@@ -113,9 +128,16 @@ func handleBrandsRetrieve(ctx context.Context, cmd *cli.Command) error {
 		return err
 	}
 
+	params := channel3go.BrandGetParams{}
+
 	var res []byte
 	options = append(options, option.WithResponseBodyInto(&res))
-	_, err = client.Brands.Get(ctx, cmd.Value("brand-id").(string), options...)
+	_, err = client.Brands.Get(
+		ctx,
+		cmd.Value("brand-id").(string),
+		params,
+		options...,
+	)
 	if err != nil {
 		return err
 	}

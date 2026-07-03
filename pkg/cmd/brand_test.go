@@ -16,6 +16,7 @@ func TestBrandsRetrieve(t *testing.T) {
 			"--api-key", "string",
 			"brands", "retrieve",
 			"--brand-id", "brand_id",
+			"--country", "US",
 		)
 	})
 }
@@ -28,6 +29,7 @@ func TestBrandsList(t *testing.T) {
 			"--api-key", "string",
 			"brands", "list",
 			"--max-items", "10",
+			"--country", "US",
 			"--cursor", "cursor",
 			"--limit", "1",
 		)
@@ -54,6 +56,7 @@ func TestBrandsSearch(t *testing.T) {
 			"--api-key", "string",
 			"brands", "search",
 			"--query", "x",
+			"--country", "US",
 			"--limit", "1",
 		)
 	})

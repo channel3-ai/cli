@@ -16,6 +16,7 @@ func TestWebsitesRetrieve(t *testing.T) {
 			"--api-key", "string",
 			"websites", "retrieve",
 			"--query", "query",
+			"--country", "US",
 		)
 	})
 }

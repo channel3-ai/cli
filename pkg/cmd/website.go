@@ -24,6 +24,11 @@ var websitesRetrieve = cli.Command{
 			Required:  true,
 			QueryPath: "query",
 		},
+		&requestflag.Flag[*string]{
+			Name:      "country",
+			Usage:     "ISO 3166-1 alpha-2 country code that `best_commission_rate` is scoped to. Defaults to 'US' when unset.",
+			QueryPath: "country",
+		},
 	},
 	Action:          handleWebsitesRetrieve,
 	HideHelpCommand: true,
