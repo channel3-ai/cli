@@ -105,6 +105,7 @@ func init() {
 				Suggest:  true,
 				Commands: []*cli.Command{
 					&productsRetrieve,
+					&productsBrowse,
 					&productsFindSimilar,
 					&productsLookup,
 					&productsSearch,

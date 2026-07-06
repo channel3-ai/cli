@@ -25,6 +25,93 @@ func TestProductsRetrieve(t *testing.T) {
 	})
 }
 
+func TestProductsBrowse(t *testing.T) {
+	t.Skip("Mock server tests are disabled")
+	t.Run("regular flags", func(t *testing.T) {
+		mocktest.TestRunMockTestWithFlags(
+			t,
+			"--api-key", "string",
+			"products", "browse",
+			"--max-items", "10",
+			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}]}, condition: new, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
+			"--limit", "1",
+			"--page-token", "page_token",
+		)
+	})
+
+	t.Run("inner flags", func(t *testing.T) {
+		// Check that inner flags have been set up correctly
+		requestflag.CheckInnerFlags(productsBrowse)
+
+		// Alternative argument passing style using inner flags
+		mocktest.TestRunMockTestWithFlags(
+			t,
+			"--api-key", "string",
+			"products", "browse",
+			"--max-items", "10",
+			"--filters.age", "[newborn]",
+			"--filters.attributes", "{foo: [string]}",
+			"--filters.availability", "[InStock]",
+			"--filters.brand-ids", "[string]",
+			"--filters.category-ids", "[string]",
+			"--filters.colors", "{palette: [{hex: hex, percentage: 0}]}",
+			"--filters.condition", "new",
+			"--filters.exclude-brand-ids", "[string]",
+			"--filters.exclude-category-ids", "[string]",
+			"--filters.exclude-website-ids", "[string]",
+			"--filters.gender", "male",
+			"--filters.price", "{max_price: 0, min_price: 0}",
+			"--filters.sale", "on_sale",
+			"--filters.website-ids", "[string]",
+			"--limit", "1",
+			"--page-token", "page_token",
+		)
+	})
+
+	t.Run("piping data", func(t *testing.T) {
+		// Test piping YAML data over stdin
+		pipeData := []byte("" +
+			"filters:\n" +
+			"  age:\n" +
+			"    - newborn\n" +
+			"  attributes:\n" +
+			"    foo:\n" +
+			"      - string\n" +
+			"  availability:\n" +
+			"    - InStock\n" +
+			"  brand_ids:\n" +
+			"    - string\n" +
+			"  category_ids:\n" +
+			"    - string\n" +
+			"  colors:\n" +
+			"    palette:\n" +
+			"      - hex: hex\n" +
+			"        percentage: 0\n" +
+			"  condition: new\n" +
+			"  exclude_brand_ids:\n" +
+			"    - string\n" +
+			"  exclude_category_ids:\n" +
+			"    - string\n" +
+			"  exclude_website_ids:\n" +
+			"    - string\n" +
+			"  gender: male\n" +
+			"  price:\n" +
+			"    max_price: 0\n" +
+			"    min_price: 0\n" +
+			"  sale: on_sale\n" +
+			"  website_ids:\n" +
+			"    - string\n" +
+			"limit: 1\n" +
+			"page_token: page_token\n")
+		mocktest.TestRunMockTestWithPipeAndFlags(
+			t, pipeData,
+			"--api-key", "string",
+			"products", "browse",
+			"--max-items", "10",
+		)
+	})
+}
+
 func TestProductsFindSimilar(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	t.Run("regular flags", func(t *testing.T) {

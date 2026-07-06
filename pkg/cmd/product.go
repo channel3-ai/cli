@@ -49,6 +49,109 @@ var productsRetrieve = cli.Command{
 	HideHelpCommand: true,
 }
 
+var productsBrowse = requestflag.WithInnerFlags(cli.Command{
+	Name:    "browse",
+	Usage:   "List and page through products for a set of filters.",
+	Suggest: true,
+	Flags: []cli.Flag{
+		&requestflag.Flag[map[string]any]{
+			Name:     "filters",
+			Usage:    "Search filters for the search API.",
+			BodyPath: "filters",
+		},
+		&requestflag.Flag[*int64]{
+			Name:     "limit",
+			Usage:    "Optional limit on the number of results. Default is 20, max is 30.",
+			Default:  requestflag.Ptr[int64](20),
+			BodyPath: "limit",
+		},
+		&requestflag.Flag[*string]{
+			Name:     "page-token",
+			Usage:    "Opaque token from a previous browse response to fetch the next page.",
+			BodyPath: "page_token",
+		},
+		&requestflag.Flag[int64]{
+			Name:  "max-items",
+			Usage: "The maximum number of items to return (use -1 for unlimited).",
+		},
+	},
+	Action:          handleProductsBrowse,
+	HideHelpCommand: true,
+}, map[string][]requestflag.HasOuterFlag{
+	"filters": {
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.age",
+			Usage:      "Filter by age group. Age-agnostic products are treated as adult products.",
+			InnerField: "age",
+		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.attributes",
+			Usage:      "If provided, only products whose extracted attributes match these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys/values per category.",
+			InnerField: "attributes",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.availability",
+			Usage:      "If provided, only products with these availability statuses will be returned",
+			InnerField: "availability",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.brand-ids",
+			Usage:      "If provided, only products from these brands will be returned",
+			InnerField: "brand_ids",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.category-ids",
+			Usage:      "If provided, only products from these categories will be returned. Accepts category slugs.",
+			InnerField: "category_ids",
+		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.colors",
+			Usage:      "[Beta] Color filter wrapper. Holds the list of required colors today;\nreserved for future filter-level options (e.g. match modes, tolerance overrides).",
+			InnerField: "colors",
+		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "filters.condition",
+			Usage:      "Filter by offer condition. Requires at least one offer matching the requested condition, locale, and any price filter. Offers without condition data are indexed as new.",
+			InnerField: "condition",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.exclude-brand-ids",
+			Usage:      "If provided, products from these brands will be excluded from the results",
+			InnerField: "exclude_brand_ids",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.exclude-category-ids",
+			Usage:      "If provided, products in these categories (or their descendants) will be excluded from the results. Accepts category slugs.",
+			InnerField: "exclude_category_ids",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.exclude-website-ids",
+			Usage:      `If provided, products from these websites will be excluded from the results. Accepts website IDs or domains (e.g. "nike.com").`,
+			InnerField: "exclude_website_ids",
+		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "filters.gender",
+			Usage:      `Allowed values: "male", "female".`,
+			InnerField: "gender",
+		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.price",
+			Usage:      "Price filter for search. Values are inclusive.",
+			InnerField: "price",
+		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "filters.sale",
+			Usage:      "If 'on_sale', only products with at least one on-sale offer (priced below its compare-at price) for the requested locale are returned. If omitted, no filter.",
+			InnerField: "sale",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.website-ids",
+			Usage:      `If provided, only products from these websites will be returned. Accepts website IDs or domains (e.g. "nike.com").`,
+			InnerField: "website_ids",
+		},
+	},
+})
+
 var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 	Name:    "find-similar",
 	Usage:   "Find products similar to a given product.",
@@ -539,6 +642,61 @@ func handleProductsRetrieve(ctx context.Context, cmd *cli.Command) error {
 		Title:          "products retrieve",
 		Transform:      transform,
 	})
+}
+
+func handleProductsBrowse(ctx context.Context, cmd *cli.Command) error {
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
+	unusedArgs := cmd.Args().Slice()
+
+	if len(unusedArgs) > 0 {
+		return fmt.Errorf("Unexpected extra arguments: %v", unusedArgs)
+	}
+
+	options, err := flagOptions(
+		cmd,
+		apiquery.NestedQueryFormatBrackets,
+		apiquery.ArrayQueryFormatComma,
+		ApplicationJSON,
+		false,
+	)
+	if err != nil {
+		return err
+	}
+
+	params := channel3go.ProductBrowseParams{}
+
+	format := cmd.Root().String("format")
+	explicitFormat := cmd.Root().IsSet("format")
+	transform := cmd.Root().String("transform")
+	if format == "raw" {
+		var res []byte
+		options = append(options, option.WithResponseBodyInto(&res))
+		_, err = client.Products.Browse(ctx, params, options...)
+		if err != nil {
+			return err
+		}
+		obj := gjson.ParseBytes(res)
+		return ShowJSON(obj, ShowJSONOpts{
+			ExplicitFormat: explicitFormat,
+			Format:         format,
+			RawOutput:      cmd.Root().Bool("raw-output"),
+			Title:          "products browse",
+			Transform:      transform,
+		})
+	} else {
+		iter := client.Products.BrowseAutoPaging(ctx, params, options...)
+		maxItems := int64(-1)
+		if cmd.IsSet("max-items") {
+			maxItems = cmd.Value("max-items").(int64)
+		}
+		return ShowJSONIterator(iter, maxItems, ShowJSONOpts{
+			ExplicitFormat: explicitFormat,
+			Format:         format,
+			RawOutput:      cmd.Root().Bool("raw-output"),
+			Title:          "products browse",
+			Transform:      transform,
+		})
+	}
 }
 
 func handleProductsFindSimilar(ctx context.Context, cmd *cli.Command) error {
