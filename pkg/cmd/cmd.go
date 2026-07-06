@@ -108,6 +108,7 @@ func init() {
 					&productsBrowse,
 					&productsFindSimilar,
 					&productsLookup,
+					&productsMonetize,
 					&productsSearch,
 					&productsSearchByImage,
 				},

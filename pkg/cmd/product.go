@@ -305,6 +305,22 @@ var productsLookup = cli.Command{
 	HideHelpCommand: true,
 }
 
+var productsMonetize = cli.Command{
+	Name:    "monetize",
+	Usage:   "Return monetizable offers (with max commission rate) for a product URL.",
+	Suggest: true,
+	Flags: []cli.Flag{
+		&requestflag.Flag[string]{
+			Name:     "url",
+			Usage:    "The URL of the product to monetize",
+			Required: true,
+			BodyPath: "url",
+		},
+	},
+	Action:          handleProductsMonetize,
+	HideHelpCommand: true,
+}
+
 var productsSearch = requestflag.WithInnerFlags(cli.Command{
 	Name:    "search",
 	Usage:   "Search for products with pagination support.",
@@ -791,6 +807,47 @@ func handleProductsLookup(ctx context.Context, cmd *cli.Command) error {
 		Format:         format,
 		RawOutput:      cmd.Root().Bool("raw-output"),
 		Title:          "products lookup",
+		Transform:      transform,
+	})
+}
+
+func handleProductsMonetize(ctx context.Context, cmd *cli.Command) error {
+	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
+	unusedArgs := cmd.Args().Slice()
+
+	if len(unusedArgs) > 0 {
+		return fmt.Errorf("Unexpected extra arguments: %v", unusedArgs)
+	}
+
+	options, err := flagOptions(
+		cmd,
+		apiquery.NestedQueryFormatBrackets,
+		apiquery.ArrayQueryFormatComma,
+		ApplicationJSON,
+		false,
+	)
+	if err != nil {
+		return err
+	}
+
+	params := channel3go.ProductMonetizeParams{}
+
+	var res []byte
+	options = append(options, option.WithResponseBodyInto(&res))
+	_, err = client.Products.Monetize(ctx, params, options...)
+	if err != nil {
+		return err
+	}
+
+	obj := gjson.ParseBytes(res)
+	format := cmd.Root().String("format")
+	explicitFormat := cmd.Root().IsSet("format")
+	transform := cmd.Root().String("transform")
+	return ShowJSON(obj, ShowJSONOpts{
+		ExplicitFormat: explicitFormat,
+		Format:         format,
+		RawOutput:      cmd.Root().Bool("raw-output"),
+		Title:          "products monetize",
 		Transform:      transform,
 	})
 }
