@@ -17,7 +17,7 @@ func TestSearchPerform(t *testing.T) {
 			"--api-key", "string",
 			"search", "perform",
 			"--base64-image", "base64_image",
-			"--config", "{country: US, currency: USD, keyword_search_only: true, language: en, mode: keyword, preferred_length_unit: mm, preferred_weight_unit: mg}",
+			"--config", "{country: US, currency: USD, keyword_search_only: true, language: en, length_unit: mm, mode: keyword, weight_unit: mg}",
 			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}]}, condition: new, dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
 			"--image-url", "image_url",
 			"--limit", "1",
@@ -40,9 +40,9 @@ func TestSearchPerform(t *testing.T) {
 			"--config.currency", "USD",
 			"--config.keyword-search-only=true",
 			"--config.language", "en",
+			"--config.length-unit", "mm",
 			"--config.mode", "keyword",
-			"--config.preferred-length-unit", "mm",
-			"--config.preferred-weight-unit", "mg",
+			"--config.weight-unit", "mg",
 			"--filters.age", "[newborn]",
 			"--filters.attributes", "{foo: [string]}",
 			"--filters.availability", "[InStock]",
@@ -74,9 +74,9 @@ func TestSearchPerform(t *testing.T) {
 			"  currency: USD\n" +
 			"  keyword_search_only: true\n" +
 			"  language: en\n" +
+			"  length_unit: mm\n" +
 			"  mode: keyword\n" +
-			"  preferred_length_unit: mm\n" +
-			"  preferred_weight_unit: mg\n" +
+			"  weight_unit: mg\n" +
 			"filters:\n" +
 			"  age:\n" +
 			"    - newborn\n" +

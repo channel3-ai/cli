@@ -58,6 +58,12 @@ func getDefaultRequestOptions(cmd *cli.Command) []option.RequestOption {
 	if cmd.IsSet("currency") {
 		opts = append(opts, option.WithCurrency(cmd.String("currency")))
 	}
+	if cmd.IsSet("length-unit") {
+		opts = append(opts, option.WithLengthUnit(cmd.String("length-unit")))
+	}
+	if cmd.IsSet("weight-unit") {
+		opts = append(opts, option.WithWeightUnit(cmd.String("weight-unit")))
+	}
 
 	// Override base URL if the --base-url flag is provided
 	if baseURL := cmd.String("base-url"); baseURL != "" {

@@ -80,20 +80,20 @@ var searchPerform = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "ISO 639-1 language code. When unset, inferred from ``country`` (preferred) then ``currency``, defaulting to ``en``.",
 			InnerField: "language",
 		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "config.length-unit",
+			Usage:      "Preferred unit for length dimensions (length/width/height) in responses. A request dimension filter's unit for the field takes precedence; when neither is set, the merchant's stated unit is returned.",
+			InnerField: "length_unit",
+		},
 		&requestflag.InnerFlag[string]{
 			Name:       "config.mode",
 			Usage:      "Search strategy. `default` (recommended) combines lexical + semantic search and is right for most use cases. `keyword` is lexical only — use it for real-time, low-latency needs like ad targeting. `agentic` uses an LLM to plan multiple structured sub-searches for complex queries, with higher latency than the other modes.",
 			InnerField: "mode",
 		},
 		&requestflag.InnerFlag[*string]{
-			Name:       "config.preferred-length-unit",
-			Usage:      "Preferred unit for length dimensions (length/width/height) in responses. A request dimension filter's unit for the field takes precedence; when neither is set, the merchant's stated unit is returned.",
-			InnerField: "preferred_length_unit",
-		},
-		&requestflag.InnerFlag[*string]{
-			Name:       "config.preferred-weight-unit",
+			Name:       "config.weight-unit",
 			Usage:      "Preferred unit for weight dimensions in responses. A request dimension filter's weight unit takes precedence; when neither is set, the merchant's stated unit is returned.",
-			InnerField: "preferred_weight_unit",
+			InnerField: "weight_unit",
 		},
 	},
 	"filters": {

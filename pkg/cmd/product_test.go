@@ -20,9 +20,9 @@ func TestProductsRetrieve(t *testing.T) {
 			"--country", "US",
 			"--currency", "USD",
 			"--language", "en",
-			"--preferred-length-unit", "mm",
-			"--preferred-weight-unit", "mg",
+			"--length-unit", "mm",
 			"--website-id", "[string]",
+			"--weight-unit", "mg",
 		)
 	})
 }
@@ -141,7 +141,7 @@ func TestProductsFindSimilar(t *testing.T) {
 			"products", "find-similar",
 			"--max-items", "10",
 			"--product-id", "product_id",
-			"--config", "{country: US, currency: USD, language: en, preferred_length_unit: mm, preferred_weight_unit: mg}",
+			"--config", "{country: US, currency: USD, language: en, length_unit: mm, weight_unit: mg}",
 			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}]}, condition: new, dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
 			"--limit", "1",
 			"--page-token", "page_token",
@@ -162,8 +162,8 @@ func TestProductsFindSimilar(t *testing.T) {
 			"--config.country", "US",
 			"--config.currency", "USD",
 			"--config.language", "en",
-			"--config.preferred-length-unit", "mm",
-			"--config.preferred-weight-unit", "mg",
+			"--config.length-unit", "mm",
+			"--config.weight-unit", "mg",
 			"--filters.age", "[newborn]",
 			"--filters.attributes", "{foo: [string]}",
 			"--filters.availability", "[InStock]",
@@ -192,8 +192,8 @@ func TestProductsFindSimilar(t *testing.T) {
 			"  country: US\n" +
 			"  currency: USD\n" +
 			"  language: en\n" +
-			"  preferred_length_unit: mm\n" +
-			"  preferred_weight_unit: mg\n" +
+			"  length_unit: mm\n" +
+			"  weight_unit: mg\n" +
 			"filters:\n" +
 			"  age:\n" +
 			"    - newborn\n" +
@@ -308,7 +308,7 @@ func TestProductsSearch(t *testing.T) {
 			"products", "search",
 			"--max-items", "10",
 			"--base64-image", "base64_image",
-			"--config", "{country: US, currency: USD, keyword_search_only: true, language: en, mode: keyword, preferred_length_unit: mm, preferred_weight_unit: mg}",
+			"--config", "{country: US, currency: USD, keyword_search_only: true, language: en, length_unit: mm, mode: keyword, weight_unit: mg}",
 			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}]}, condition: new, dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
 			"--image-url", "image_url",
 			"--limit", "1",
@@ -332,9 +332,9 @@ func TestProductsSearch(t *testing.T) {
 			"--config.currency", "USD",
 			"--config.keyword-search-only=true",
 			"--config.language", "en",
+			"--config.length-unit", "mm",
 			"--config.mode", "keyword",
-			"--config.preferred-length-unit", "mm",
-			"--config.preferred-weight-unit", "mg",
+			"--config.weight-unit", "mg",
 			"--filters.age", "[newborn]",
 			"--filters.attributes", "{foo: [string]}",
 			"--filters.availability", "[InStock]",
@@ -366,9 +366,9 @@ func TestProductsSearch(t *testing.T) {
 			"  currency: USD\n" +
 			"  keyword_search_only: true\n" +
 			"  language: en\n" +
+			"  length_unit: mm\n" +
 			"  mode: keyword\n" +
-			"  preferred_length_unit: mm\n" +
-			"  preferred_weight_unit: mg\n" +
+			"  weight_unit: mg\n" +
 			"filters:\n" +
 			"  age:\n" +
 			"    - newborn\n" +
@@ -438,7 +438,7 @@ func TestProductsSearchByImage(t *testing.T) {
 			"products", "search-by-image",
 			"--max-items", "10",
 			"--base64-image", "base64_image",
-			"--config", "{country: US, currency: USD, language: en, preferred_length_unit: mm, preferred_weight_unit: mg}",
+			"--config", "{country: US, currency: USD, language: en, length_unit: mm, weight_unit: mg}",
 			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}]}, condition: new, dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
 			"--image-url", "image_url",
 			"--limit", "1",
@@ -461,8 +461,8 @@ func TestProductsSearchByImage(t *testing.T) {
 			"--config.country", "US",
 			"--config.currency", "USD",
 			"--config.language", "en",
-			"--config.preferred-length-unit", "mm",
-			"--config.preferred-weight-unit", "mg",
+			"--config.length-unit", "mm",
+			"--config.weight-unit", "mg",
 			"--filters.age", "[newborn]",
 			"--filters.attributes", "{foo: [string]}",
 			"--filters.availability", "[InStock]",
@@ -493,8 +493,8 @@ func TestProductsSearchByImage(t *testing.T) {
 			"  country: US\n" +
 			"  currency: USD\n" +
 			"  language: en\n" +
-			"  preferred_length_unit: mm\n" +
-			"  preferred_weight_unit: mg\n" +
+			"  length_unit: mm\n" +
+			"  weight_unit: mg\n" +
 			"filters:\n" +
 			"  age:\n" +
 			"    - newborn\n" +

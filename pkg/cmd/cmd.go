@@ -97,6 +97,16 @@ func init() {
 				Usage:   "Default ISO 4217 currency code applied to product calls (e.g. 'GBP'). Per-call values override this.",
 				Sources: cli.EnvVars("CHANNEL3_CURRENCY"),
 			},
+			&requestflag.Flag[string]{
+				Name:    "length-unit",
+				Usage:   "Default preferred unit for length dimensions in responses (one of mm, cm, m, in, ft). Per-call config.length_unit overrides this.",
+				Sources: cli.EnvVars("CHANNEL3_LENGTH_UNIT"),
+			},
+			&requestflag.Flag[string]{
+				Name:    "weight-unit",
+				Usage:   "Default preferred unit for weight dimensions in responses (one of mg, g, kg, oz, lb). Per-call config.weight_unit overrides this.",
+				Sources: cli.EnvVars("CHANNEL3_WEIGHT_UNIT"),
+			},
 		},
 		Commands: []*cli.Command{
 			{

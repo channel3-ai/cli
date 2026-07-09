@@ -62,12 +62,14 @@ For details about specific commands, use the `--help` flag.
 
 ### Environment variables
 
-| Environment variable | Description                                                                                                    | Required | Default value |
-| -------------------- | -------------------------------------------------------------------------------------------------------------- | -------- | ------------- |
-| `CHANNEL3_API_KEY`   |                                                                                                                | yes      |               |
-| `CHANNEL3_LANGUAGE`  | Default ISO 639-1 language code applied to product calls (e.g. 'en'). Per-call config.language overrides this. | no       | `null`        |
-| `CHANNEL3_COUNTRY`   | Default ISO 3166-1 alpha-2 country code applied to product calls (e.g. 'GB'). Per-call values override this.   | no       | `null`        |
-| `CHANNEL3_CURRENCY`  | Default ISO 4217 currency code applied to product calls (e.g. 'GBP'). Per-call values override this.           | no       | `null`        |
+| Environment variable   | Description                                                                                                                       | Required | Default value |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------- |
+| `CHANNEL3_API_KEY`     |                                                                                                                                   | yes      |               |
+| `CHANNEL3_LANGUAGE`    | Default ISO 639-1 language code applied to product calls (e.g. 'en'). Per-call config.language overrides this.                    | no       | `null`        |
+| `CHANNEL3_COUNTRY`     | Default ISO 3166-1 alpha-2 country code applied to product calls (e.g. 'GB'). Per-call values override this.                      | no       | `null`        |
+| `CHANNEL3_CURRENCY`    | Default ISO 4217 currency code applied to product calls (e.g. 'GBP'). Per-call values override this.                              | no       | `null`        |
+| `CHANNEL3_LENGTH_UNIT` | Default preferred unit for length dimensions in responses (one of mm, cm, m, in, ft). Per-call config.length_unit overrides this. | no       | `null`        |
+| `CHANNEL3_WEIGHT_UNIT` | Default preferred unit for weight dimensions in responses (one of mg, g, kg, oz, lb). Per-call config.weight_unit overrides this. | no       | `null`        |
 
 ### Global flags
 
@@ -75,6 +77,8 @@ For details about specific commands, use the `--help` flag.
 - `--language` - Default ISO 639-1 language code applied to product calls (e.g. 'en'). Per-call config.language overrides this. (can also be set with `CHANNEL3_LANGUAGE` env var)
 - `--country` - Default ISO 3166-1 alpha-2 country code applied to product calls (e.g. 'GB'). Per-call values override this. (can also be set with `CHANNEL3_COUNTRY` env var)
 - `--currency` - Default ISO 4217 currency code applied to product calls (e.g. 'GBP'). Per-call values override this. (can also be set with `CHANNEL3_CURRENCY` env var)
+- `--length-unit` - Default preferred unit for length dimensions in responses (one of mm, cm, m, in, ft). Per-call config.length_unit overrides this. (can also be set with `CHANNEL3_LENGTH_UNIT` env var)
+- `--weight-unit` - Default preferred unit for weight dimensions in responses (one of mg, g, kg, oz, lb). Per-call config.weight_unit overrides this. (can also be set with `CHANNEL3_WEIGHT_UNIT` env var)
 - `--help` - Show command line usage
 - `--debug` - Enable debug logging (includes HTTP request/response details)
 - `--version`, `-v` - Show the CLI version
