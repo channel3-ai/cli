@@ -39,6 +39,16 @@ var productsRetrieve = cli.Command{
 			Usage:     "ISO 639-1 language code. Matches any language when unset; defaults to 'en' only when country and currency are also unset.",
 			QueryPath: "language",
 		},
+		&requestflag.Flag[*string]{
+			Name:      "preferred-length-unit",
+			Usage:     "Preferred unit for length dimensions (length/width/height). When unset, dimensions are returned in the unit the merchant stated.",
+			QueryPath: "preferred_length_unit",
+		},
+		&requestflag.Flag[*string]{
+			Name:      "preferred-weight-unit",
+			Usage:     "Preferred unit for weight dimensions. When unset, weight is returned in the unit the merchant stated.",
+			QueryPath: "preferred_weight_unit",
+		},
 		&requestflag.Flag[any]{
 			Name:      "website-id",
 			Usage:     `Optional list of website IDs to constrain the buy URL to, relevant if multiple merchants exist. Accepts website IDs or domains (e.g. "nike.com").`,
@@ -113,6 +123,11 @@ var productsBrowse = requestflag.WithInnerFlags(cli.Command{
 			Name:       "filters.condition",
 			Usage:      "Filter by offer condition. Requires at least one offer matching the requested condition, locale, and any price filter. Offers without condition data are indexed as new.",
 			InnerField: "condition",
+		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.dimensions",
+			Usage:      "Physical-dimension range filters, matched against the same offer.\n\nMatching products have at least one offer satisfying every provided\nrange (alongside any locale/price/availability filters). Values are\ncompared with a small relative tolerance. An offer with no dimension data\nfor a filtered field does not match; note that when a single merchant on a\nproduct reports a dimension it is shared across that product's offers, so a\nmatching offer may not itself surface that dimension in the response.",
+			InnerField: "dimensions",
 		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.exclude-brand-ids",
@@ -208,6 +223,16 @@ var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "ISO 639-1 language code. When unset, inferred from ``country`` (preferred) then ``currency``, defaulting to ``en``.",
 			InnerField: "language",
 		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "config.preferred-length-unit",
+			Usage:      "Preferred unit for length dimensions (length/width/height) in responses. A request dimension filter's unit for the field takes precedence; when neither is set, the merchant's stated unit is returned.",
+			InnerField: "preferred_length_unit",
+		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "config.preferred-weight-unit",
+			Usage:      "Preferred unit for weight dimensions in responses. A request dimension filter's weight unit takes precedence; when neither is set, the merchant's stated unit is returned.",
+			InnerField: "preferred_weight_unit",
+		},
 	},
 	"filters": {
 		&requestflag.InnerFlag[any]{
@@ -244,6 +269,11 @@ var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 			Name:       "filters.condition",
 			Usage:      "Filter by offer condition. Requires at least one offer matching the requested condition, locale, and any price filter. Offers without condition data are indexed as new.",
 			InnerField: "condition",
+		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.dimensions",
+			Usage:      "Physical-dimension range filters, matched against the same offer.\n\nMatching products have at least one offer satisfying every provided\nrange (alongside any locale/price/availability filters). Values are\ncompared with a small relative tolerance. An offer with no dimension data\nfor a filtered field does not match; note that when a single merchant on a\nproduct reports a dimension it is shared across that product's offers, so a\nmatching offer may not itself surface that dimension in the response.",
+			InnerField: "dimensions",
 		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.exclude-brand-ids",
@@ -396,6 +426,16 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "Search strategy. `default` (recommended) combines lexical + semantic search and is right for most use cases. `keyword` is lexical only — use it for real-time, low-latency needs like ad targeting. `agentic` uses an LLM to plan multiple structured sub-searches for complex queries, with higher latency than the other modes.",
 			InnerField: "mode",
 		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "config.preferred-length-unit",
+			Usage:      "Preferred unit for length dimensions (length/width/height) in responses. A request dimension filter's unit for the field takes precedence; when neither is set, the merchant's stated unit is returned.",
+			InnerField: "preferred_length_unit",
+		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "config.preferred-weight-unit",
+			Usage:      "Preferred unit for weight dimensions in responses. A request dimension filter's weight unit takes precedence; when neither is set, the merchant's stated unit is returned.",
+			InnerField: "preferred_weight_unit",
+		},
 	},
 	"filters": {
 		&requestflag.InnerFlag[any]{
@@ -432,6 +472,11 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 			Name:       "filters.condition",
 			Usage:      "Filter by offer condition. Requires at least one offer matching the requested condition, locale, and any price filter. Offers without condition data are indexed as new.",
 			InnerField: "condition",
+		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.dimensions",
+			Usage:      "Physical-dimension range filters, matched against the same offer.\n\nMatching products have at least one offer satisfying every provided\nrange (alongside any locale/price/availability filters). Values are\ncompared with a small relative tolerance. An offer with no dimension data\nfor a filtered field does not match; note that when a single merchant on a\nproduct reports a dimension it is shared across that product's offers, so a\nmatching offer may not itself surface that dimension in the response.",
+			InnerField: "dimensions",
 		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.exclude-brand-ids",
@@ -536,6 +581,16 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "ISO 639-1 language code. When unset, inferred from ``country`` (preferred) then ``currency``, defaulting to ``en``.",
 			InnerField: "language",
 		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "config.preferred-length-unit",
+			Usage:      "Preferred unit for length dimensions (length/width/height) in responses. A request dimension filter's unit for the field takes precedence; when neither is set, the merchant's stated unit is returned.",
+			InnerField: "preferred_length_unit",
+		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "config.preferred-weight-unit",
+			Usage:      "Preferred unit for weight dimensions in responses. A request dimension filter's weight unit takes precedence; when neither is set, the merchant's stated unit is returned.",
+			InnerField: "preferred_weight_unit",
+		},
 	},
 	"filters": {
 		&requestflag.InnerFlag[any]{
@@ -572,6 +627,11 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 			Name:       "filters.condition",
 			Usage:      "Filter by offer condition. Requires at least one offer matching the requested condition, locale, and any price filter. Offers without condition data are indexed as new.",
 			InnerField: "condition",
+		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.dimensions",
+			Usage:      "Physical-dimension range filters, matched against the same offer.\n\nMatching products have at least one offer satisfying every provided\nrange (alongside any locale/price/availability filters). Values are\ncompared with a small relative tolerance. An offer with no dimension data\nfor a filtered field does not match; note that when a single merchant on a\nproduct reports a dimension it is shared across that product's offers, so a\nmatching offer may not itself surface that dimension in the response.",
+			InnerField: "dimensions",
 		},
 		&requestflag.InnerFlag[any]{
 			Name:       "filters.exclude-brand-ids",
