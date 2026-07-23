@@ -18,7 +18,7 @@ func TestSearchPerform(t *testing.T) {
 			"search", "perform",
 			"--base64-image", "base64_image",
 			"--config", "{country: US, currency: USD, keyword_search_only: true, language: en, length_unit: mm, mode: keyword, weight_unit: mg}",
-			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}]}, condition: new, dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
+			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}], match: strict}, condition: new, dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
 			"--image-url", "image_url",
 			"--limit", "1",
 			"--page-token", "page_token",
@@ -48,7 +48,7 @@ func TestSearchPerform(t *testing.T) {
 			"--filters.availability", "[InStock]",
 			"--filters.brand-ids", "[string]",
 			"--filters.category-ids", "[string]",
-			"--filters.colors", "{palette: [{hex: hex, percentage: 0}]}",
+			"--filters.colors", "{palette: [{hex: hex, percentage: 0}], match: strict}",
 			"--filters.condition", "new",
 			"--filters.dimensions", "{height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}",
 			"--filters.exclude-brand-ids", "[string]",
@@ -93,6 +93,7 @@ func TestSearchPerform(t *testing.T) {
 			"    palette:\n" +
 			"      - hex: hex\n" +
 			"        percentage: 0\n" +
+			"    match: strict\n" +
 			"  condition: new\n" +
 			"  dimensions:\n" +
 			"    height:\n" +

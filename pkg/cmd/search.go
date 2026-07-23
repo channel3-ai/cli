@@ -124,7 +124,7 @@ var searchPerform = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "filters.colors",
-			Usage:      "[Beta] Color filter wrapper. Holds the list of required colors today;\nreserved for future filter-level options (e.g. match modes, tolerance overrides).",
+			Usage:      "[Beta] Color filter wrapper. Holds required colors and optional match mode.",
 			InnerField: "colors",
 		},
 		&requestflag.InnerFlag[*string]{
