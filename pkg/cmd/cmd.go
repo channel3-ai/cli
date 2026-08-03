@@ -124,6 +124,22 @@ func init() {
 				},
 			},
 			{
+				Name:     "reporting:clicks",
+				Category: "API RESOURCE",
+				Suggest:  true,
+				Commands: []*cli.Command{
+					&reportingClicksList,
+				},
+			},
+			{
+				Name:     "reporting:transactions",
+				Category: "API RESOURCE",
+				Suggest:  true,
+				Commands: []*cli.Command{
+					&reportingTransactionsList,
+				},
+			},
+			{
 				Name:     "brands",
 				Category: "API RESOURCE",
 				Suggest:  true,
