@@ -16,7 +16,7 @@ import (
 
 var reportingTransactionsList = cli.Command{
 	Name:    "list",
-	Usage:   "List affiliate transactions for your account over a datetime window.",
+	Usage:   "List transactions for your account over a datetime window.",
 	Suggest: true,
 	Flags: []cli.Flag{
 		&requestflag.Flag[any]{

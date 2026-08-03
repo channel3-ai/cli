@@ -16,7 +16,7 @@ import (
 
 var reportingClicksList = cli.Command{
 	Name:    "list",
-	Usage:   "List affiliate clicks for your account over a datetime window.",
+	Usage:   "List clicks for your account over a datetime window.",
 	Suggest: true,
 	Flags: []cli.Flag{
 		&requestflag.Flag[any]{
