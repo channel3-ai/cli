@@ -41,6 +41,11 @@ var reportingTransactionsList = cli.Command{
 			Usage:     "Inclusive start of the window (ISO 8601 datetime with optional offset, e.g. 2026-08-01T00:00:00-04:00). Offset-aware values are converted to UTC; naive values are treated as UTC.",
 			QueryPath: "start_date",
 		},
+		&requestflag.Flag[*string]{
+			Name:      "user-id",
+			Usage:     "Filter results to clicks or transactions for this user.",
+			QueryPath: "user_id",
+		},
 		&requestflag.Flag[int64]{
 			Name:  "max-items",
 			Usage: "The maximum number of items to return (use -1 for unlimited).",

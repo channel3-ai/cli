@@ -23,6 +23,7 @@ func TestProductsRetrieve(t *testing.T) {
 			"--length-unit", "mm",
 			"--website-id", "[string]",
 			"--weight-unit", "mg",
+			"--x-user-id", "x-user-id",
 		)
 	})
 }
@@ -35,9 +36,10 @@ func TestProductsBrowse(t *testing.T) {
 			"--api-key", "string",
 			"products", "browse",
 			"--max-items", "10",
-			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}], match: strict}, condition: new, dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
+			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}], match: strict}, condition: new, conditions: [new], dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
 			"--limit", "1",
 			"--page-token", "page_token",
+			"--x-user-id", "x-user-id",
 		)
 	})
 
@@ -58,6 +60,7 @@ func TestProductsBrowse(t *testing.T) {
 			"--filters.category-ids", "[string]",
 			"--filters.colors", "{palette: [{hex: hex, percentage: 0}], match: strict}",
 			"--filters.condition", "new",
+			"--filters.conditions", "[new]",
 			"--filters.dimensions", "{height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}",
 			"--filters.exclude-brand-ids", "[string]",
 			"--filters.exclude-category-ids", "[string]",
@@ -68,6 +71,7 @@ func TestProductsBrowse(t *testing.T) {
 			"--filters.website-ids", "[string]",
 			"--limit", "1",
 			"--page-token", "page_token",
+			"--x-user-id", "x-user-id",
 		)
 	})
 
@@ -92,6 +96,8 @@ func TestProductsBrowse(t *testing.T) {
 			"        percentage: 0\n" +
 			"    match: strict\n" +
 			"  condition: new\n" +
+			"  conditions:\n" +
+			"    - new\n" +
 			"  dimensions:\n" +
 			"    height:\n" +
 			"      unit: mm\n" +
@@ -129,6 +135,7 @@ func TestProductsBrowse(t *testing.T) {
 			"--api-key", "string",
 			"products", "browse",
 			"--max-items", "10",
+			"--x-user-id", "x-user-id",
 		)
 	})
 }
@@ -143,9 +150,10 @@ func TestProductsFindSimilar(t *testing.T) {
 			"--max-items", "10",
 			"--product-id", "product_id",
 			"--config", "{country: US, currency: USD, language: en, length_unit: mm, weight_unit: mg}",
-			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}], match: strict}, condition: new, dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
+			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}], match: strict}, condition: new, conditions: [new], dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
 			"--limit", "1",
 			"--page-token", "page_token",
+			"--x-user-id", "x-user-id",
 		)
 	})
 
@@ -172,6 +180,7 @@ func TestProductsFindSimilar(t *testing.T) {
 			"--filters.category-ids", "[string]",
 			"--filters.colors", "{palette: [{hex: hex, percentage: 0}], match: strict}",
 			"--filters.condition", "new",
+			"--filters.conditions", "[new]",
 			"--filters.dimensions", "{height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}",
 			"--filters.exclude-brand-ids", "[string]",
 			"--filters.exclude-category-ids", "[string]",
@@ -182,6 +191,7 @@ func TestProductsFindSimilar(t *testing.T) {
 			"--filters.website-ids", "[string]",
 			"--limit", "1",
 			"--page-token", "page_token",
+			"--x-user-id", "x-user-id",
 		)
 	})
 
@@ -213,6 +223,8 @@ func TestProductsFindSimilar(t *testing.T) {
 			"        percentage: 0\n" +
 			"    match: strict\n" +
 			"  condition: new\n" +
+			"  conditions:\n" +
+			"    - new\n" +
 			"  dimensions:\n" +
 			"    height:\n" +
 			"      unit: mm\n" +
@@ -250,6 +262,7 @@ func TestProductsFindSimilar(t *testing.T) {
 			"--api-key", "string",
 			"products", "find-similar",
 			"--max-items", "10",
+			"--x-user-id", "x-user-id",
 		)
 	})
 }
@@ -263,6 +276,7 @@ func TestProductsLookup(t *testing.T) {
 			"products", "lookup",
 			"--url", "url",
 			"--max-staleness-hours", "1",
+			"--x-user-id", "x-user-id",
 		)
 	})
 
@@ -275,6 +289,7 @@ func TestProductsLookup(t *testing.T) {
 			t, pipeData,
 			"--api-key", "string",
 			"products", "lookup",
+			"--x-user-id", "x-user-id",
 		)
 	})
 }
@@ -287,6 +302,7 @@ func TestProductsMonetize(t *testing.T) {
 			"--api-key", "string",
 			"products", "monetize",
 			"--url", "url",
+			"--x-user-id", "x-user-id",
 		)
 	})
 
@@ -297,6 +313,7 @@ func TestProductsMonetize(t *testing.T) {
 			t, pipeData,
 			"--api-key", "string",
 			"products", "monetize",
+			"--x-user-id", "x-user-id",
 		)
 	})
 }
@@ -311,11 +328,12 @@ func TestProductsSearch(t *testing.T) {
 			"--max-items", "10",
 			"--base64-image", "base64_image",
 			"--config", "{country: US, currency: USD, keyword_search_only: true, language: en, length_unit: mm, mode: keyword, weight_unit: mg}",
-			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}], match: strict}, condition: new, dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
+			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}], match: strict}, condition: new, conditions: [new], dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
 			"--image-url", "image_url",
 			"--limit", "1",
 			"--page-token", "page_token",
 			"--query", "query",
+			"--x-user-id", "x-user-id",
 		)
 	})
 
@@ -344,6 +362,7 @@ func TestProductsSearch(t *testing.T) {
 			"--filters.category-ids", "[string]",
 			"--filters.colors", "{palette: [{hex: hex, percentage: 0}], match: strict}",
 			"--filters.condition", "new",
+			"--filters.conditions", "[new]",
 			"--filters.dimensions", "{height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}",
 			"--filters.exclude-brand-ids", "[string]",
 			"--filters.exclude-category-ids", "[string]",
@@ -356,6 +375,7 @@ func TestProductsSearch(t *testing.T) {
 			"--limit", "1",
 			"--page-token", "page_token",
 			"--query", "query",
+			"--x-user-id", "x-user-id",
 		)
 	})
 
@@ -389,6 +409,8 @@ func TestProductsSearch(t *testing.T) {
 			"        percentage: 0\n" +
 			"    match: strict\n" +
 			"  condition: new\n" +
+			"  conditions:\n" +
+			"    - new\n" +
 			"  dimensions:\n" +
 			"    height:\n" +
 			"      unit: mm\n" +
@@ -428,6 +450,7 @@ func TestProductsSearch(t *testing.T) {
 			"--api-key", "string",
 			"products", "search",
 			"--max-items", "10",
+			"--x-user-id", "x-user-id",
 		)
 	})
 }
@@ -442,11 +465,12 @@ func TestProductsSearchByImage(t *testing.T) {
 			"--max-items", "10",
 			"--base64-image", "base64_image",
 			"--config", "{country: US, currency: USD, language: en, length_unit: mm, weight_unit: mg}",
-			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}], match: strict}, condition: new, dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
+			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}], match: strict}, condition: new, conditions: [new], dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
 			"--image-url", "image_url",
 			"--limit", "1",
 			"--page-token", "page_token",
 			"--segment", "segment",
+			"--x-user-id", "x-user-id",
 		)
 	})
 
@@ -473,6 +497,7 @@ func TestProductsSearchByImage(t *testing.T) {
 			"--filters.category-ids", "[string]",
 			"--filters.colors", "{palette: [{hex: hex, percentage: 0}], match: strict}",
 			"--filters.condition", "new",
+			"--filters.conditions", "[new]",
 			"--filters.dimensions", "{height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}",
 			"--filters.exclude-brand-ids", "[string]",
 			"--filters.exclude-category-ids", "[string]",
@@ -485,6 +510,7 @@ func TestProductsSearchByImage(t *testing.T) {
 			"--limit", "1",
 			"--page-token", "page_token",
 			"--segment", "segment",
+			"--x-user-id", "x-user-id",
 		)
 	})
 
@@ -516,6 +542,8 @@ func TestProductsSearchByImage(t *testing.T) {
 			"        percentage: 0\n" +
 			"    match: strict\n" +
 			"  condition: new\n" +
+			"  conditions:\n" +
+			"    - new\n" +
 			"  dimensions:\n" +
 			"    height:\n" +
 			"      unit: mm\n" +
@@ -555,6 +583,7 @@ func TestProductsSearchByImage(t *testing.T) {
 			"--api-key", "string",
 			"products", "search-by-image",
 			"--max-items", "10",
+			"--x-user-id", "x-user-id",
 		)
 	})
 }

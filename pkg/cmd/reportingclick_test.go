@@ -20,6 +20,7 @@ func TestReportingClicksList(t *testing.T) {
 			"--limit", "1",
 			"--page", "1",
 			"--start-date", "'2019-12-27T18:11:19.117Z'",
+			"--user-id", "user_id",
 		)
 	})
 }

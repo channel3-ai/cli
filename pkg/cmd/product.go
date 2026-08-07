@@ -54,6 +54,11 @@ var productsRetrieve = cli.Command{
 			Usage:     "Preferred unit for weight dimensions. When unset, weight is returned in the unit the merchant stated.",
 			QueryPath: "weight_unit",
 		},
+		&requestflag.Flag[string]{
+			Name:       "x-user-id",
+			Usage:      "Optional user identifier to attribute clicks and sales to a user in your system. Channel3 appends it to buy URLs in the response.",
+			HeaderPath: "x-user-id",
+		},
 	},
 	Action:          handleProductsRetrieve,
 	HideHelpCommand: true,
@@ -79,6 +84,11 @@ var productsBrowse = requestflag.WithInnerFlags(cli.Command{
 			Name:     "page-token",
 			Usage:    "Opaque token from a previous browse response to fetch the next page.",
 			BodyPath: "page_token",
+		},
+		&requestflag.Flag[string]{
+			Name:       "x-user-id",
+			Usage:      "Optional user identifier to attribute clicks and sales to a user in your system. Channel3 appends it to buy URLs in the response.",
+			HeaderPath: "x-user-id",
 		},
 		&requestflag.Flag[int64]{
 			Name:  "max-items",
@@ -121,8 +131,13 @@ var productsBrowse = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.condition",
-			Usage:      "Filter by offer condition. Requires at least one offer matching the requested condition, locale, and any price filter. Offers without condition data are indexed as new.",
+			Usage:      "Filter by a single offer condition. Prefer `conditions` when multiple values should match (OR).",
 			InnerField: "condition",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.conditions",
+			Usage:      "Filter by any of these offer conditions (OR). Takes precedence over `condition` when set.",
+			InnerField: "conditions",
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "filters.dimensions",
@@ -199,6 +214,11 @@ var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 			Usage:    "Opaque token from a previous similar response to fetch the next page of results.",
 			BodyPath: "page_token",
 		},
+		&requestflag.Flag[string]{
+			Name:       "x-user-id",
+			Usage:      "Optional user identifier to attribute clicks and sales to a user in your system. Channel3 appends it to buy URLs in the response.",
+			HeaderPath: "x-user-id",
+		},
 		&requestflag.Flag[int64]{
 			Name:  "max-items",
 			Usage: "The maximum number of items to return (use -1 for unlimited).",
@@ -267,8 +287,13 @@ var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.condition",
-			Usage:      "Filter by offer condition. Requires at least one offer matching the requested condition, locale, and any price filter. Offers without condition data are indexed as new.",
+			Usage:      "Filter by a single offer condition. Prefer `conditions` when multiple values should match (OR).",
 			InnerField: "condition",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.conditions",
+			Usage:      "Filter by any of these offer conditions (OR). Takes precedence over `condition` when set.",
+			InnerField: "conditions",
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "filters.dimensions",
@@ -330,6 +355,11 @@ var productsLookup = cli.Command{
 			Default:  3,
 			BodyPath: "max_staleness_hours",
 		},
+		&requestflag.Flag[string]{
+			Name:       "x-user-id",
+			Usage:      "Optional user identifier to attribute clicks and sales to a user in your system. Channel3 appends it to buy URLs in the response.",
+			HeaderPath: "x-user-id",
+		},
 	},
 	Action:          handleProductsLookup,
 	HideHelpCommand: true,
@@ -345,6 +375,11 @@ var productsMonetize = cli.Command{
 			Usage:    "The URL of the product to monetize",
 			Required: true,
 			BodyPath: "url",
+		},
+		&requestflag.Flag[string]{
+			Name:       "x-user-id",
+			Usage:      "Optional user identifier to attribute clicks and sales to a user in your system. Channel3 appends it to buy URLs in the response.",
+			HeaderPath: "x-user-id",
 		},
 	},
 	Action:          handleProductsMonetize,
@@ -391,6 +426,11 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 			Name:     "query",
 			Usage:    "Search query. At least one of `query`, `image_url`, `base64_image`, or `page_token` must be provided.",
 			BodyPath: "query",
+		},
+		&requestflag.Flag[string]{
+			Name:       "x-user-id",
+			Usage:      "Optional user identifier to attribute clicks and sales to a user in your system. Channel3 appends it to buy URLs in the response.",
+			HeaderPath: "x-user-id",
 		},
 		&requestflag.Flag[int64]{
 			Name:  "max-items",
@@ -470,8 +510,13 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.condition",
-			Usage:      "Filter by offer condition. Requires at least one offer matching the requested condition, locale, and any price filter. Offers without condition data are indexed as new.",
+			Usage:      "Filter by a single offer condition. Prefer `conditions` when multiple values should match (OR).",
 			InnerField: "condition",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.conditions",
+			Usage:      "Filter by any of these offer conditions (OR). Takes precedence over `condition` when set.",
+			InnerField: "conditions",
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "filters.dimensions",
@@ -557,6 +602,11 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 			Usage:    `Image segmentation mode. None (default) disables segmentation. "AUTO" segments and crops the main product automatically. A custom string (e.g. "shoe", "mug") segments the specified object.`,
 			BodyPath: "segment",
 		},
+		&requestflag.Flag[string]{
+			Name:       "x-user-id",
+			Usage:      "Optional user identifier to attribute clicks and sales to a user in your system. Channel3 appends it to buy URLs in the response.",
+			HeaderPath: "x-user-id",
+		},
 		&requestflag.Flag[int64]{
 			Name:  "max-items",
 			Usage: "The maximum number of items to return (use -1 for unlimited).",
@@ -625,8 +675,13 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.condition",
-			Usage:      "Filter by offer condition. Requires at least one offer matching the requested condition, locale, and any price filter. Offers without condition data are indexed as new.",
+			Usage:      "Filter by a single offer condition. Prefer `conditions` when multiple values should match (OR).",
 			InnerField: "condition",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.conditions",
+			Usage:      "Filter by any of these offer conditions (OR). Takes precedence over `condition` when set.",
+			InnerField: "conditions",
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "filters.dimensions",

@@ -55,6 +55,11 @@ var searchPerform = requestflag.WithInnerFlags(cli.Command{
 			Usage:    "Search query. At least one of `query`, `image_url`, `base64_image`, or `page_token` must be provided.",
 			BodyPath: "query",
 		},
+		&requestflag.Flag[string]{
+			Name:       "x-user-id",
+			Usage:      "Optional user identifier to attribute clicks and sales to a user in your system. Channel3 appends it to buy URLs in the response.",
+			HeaderPath: "x-user-id",
+		},
 	},
 	Action:          handleSearchPerform,
 	HideHelpCommand: true,
@@ -129,8 +134,13 @@ var searchPerform = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.condition",
-			Usage:      "Filter by offer condition. Requires at least one offer matching the requested condition, locale, and any price filter. Offers without condition data are indexed as new.",
+			Usage:      "Filter by a single offer condition. Prefer `conditions` when multiple values should match (OR).",
 			InnerField: "condition",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.conditions",
+			Usage:      "Filter by any of these offer conditions (OR). Takes precedence over `condition` when set.",
+			InnerField: "conditions",
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "filters.dimensions",

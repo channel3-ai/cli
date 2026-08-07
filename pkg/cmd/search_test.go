@@ -18,11 +18,12 @@ func TestSearchPerform(t *testing.T) {
 			"search", "perform",
 			"--base64-image", "base64_image",
 			"--config", "{country: US, currency: USD, keyword_search_only: true, language: en, length_unit: mm, mode: keyword, weight_unit: mg}",
-			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}], match: strict}, condition: new, dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
+			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}], match: strict}, condition: new, conditions: [new], dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
 			"--image-url", "image_url",
 			"--limit", "1",
 			"--page-token", "page_token",
 			"--query", "query",
+			"--x-user-id", "x-user-id",
 		)
 	})
 
@@ -50,6 +51,7 @@ func TestSearchPerform(t *testing.T) {
 			"--filters.category-ids", "[string]",
 			"--filters.colors", "{palette: [{hex: hex, percentage: 0}], match: strict}",
 			"--filters.condition", "new",
+			"--filters.conditions", "[new]",
 			"--filters.dimensions", "{height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}",
 			"--filters.exclude-brand-ids", "[string]",
 			"--filters.exclude-category-ids", "[string]",
@@ -62,6 +64,7 @@ func TestSearchPerform(t *testing.T) {
 			"--limit", "1",
 			"--page-token", "page_token",
 			"--query", "query",
+			"--x-user-id", "x-user-id",
 		)
 	})
 
@@ -95,6 +98,8 @@ func TestSearchPerform(t *testing.T) {
 			"        percentage: 0\n" +
 			"    match: strict\n" +
 			"  condition: new\n" +
+			"  conditions:\n" +
+			"    - new\n" +
 			"  dimensions:\n" +
 			"    height:\n" +
 			"      unit: mm\n" +
@@ -133,6 +138,7 @@ func TestSearchPerform(t *testing.T) {
 			t, pipeData,
 			"--api-key", "string",
 			"search", "perform",
+			"--x-user-id", "x-user-id",
 		)
 	})
 }
