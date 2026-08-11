@@ -180,6 +180,30 @@ func init() {
 				},
 			},
 			{
+				Name:     "responses",
+				Category: "API RESOURCE",
+				Suggest:  true,
+				Commands: []*cli.Command{
+					&responsesCreate,
+				},
+			},
+			{
+				Name:     "conversations",
+				Category: "API RESOURCE",
+				Suggest:  true,
+				Commands: []*cli.Command{
+					&conversationsRetrieve,
+				},
+			},
+			{
+				Name:     "conversations:items",
+				Category: "API RESOURCE",
+				Suggest:  true,
+				Commands: []*cli.Command{
+					&conversationsItemsList,
+				},
+			},
+			{
 				Name:     "search",
 				Category: "API RESOURCE",
 				Suggest:  true,

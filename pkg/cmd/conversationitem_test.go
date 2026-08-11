@@ -1,0 +1,21 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+package cmd
+
+import (
+	"testing"
+
+	"github.com/channel3-ai/cli/internal/mocktest"
+)
+
+func TestConversationsItemsList(t *testing.T) {
+	t.Skip("Mock server tests are disabled")
+	t.Run("regular flags", func(t *testing.T) {
+		mocktest.TestRunMockTestWithFlags(
+			t,
+			"--api-key", "string",
+			"conversations:items", "list",
+			"--conversation-id", "conversation_id",
+		)
+	})
+}
