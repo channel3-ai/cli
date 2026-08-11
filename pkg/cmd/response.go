@@ -36,6 +36,11 @@ var responsesCreate = requestflag.WithInnerFlags(cli.Command{
 			BodyPath: "debug",
 		},
 		&requestflag.Flag[map[string]any]{
+			Name:     "filters",
+			Usage:    "Search filters for the search API.",
+			BodyPath: "filters",
+		},
+		&requestflag.Flag[map[string]any]{
 			Name:     "image",
 			BodyPath: "image",
 		},
@@ -82,6 +87,88 @@ var responsesCreate = requestflag.WithInnerFlags(cli.Command{
 			Name:       "context.user-context",
 			Usage:      "Who the conversation is with (profile, preferences, session facts).",
 			InnerField: "user_context",
+		},
+	},
+	"filters": {
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.age",
+			Usage:      "Filter by age group. Age-agnostic products are treated as adult products.",
+			InnerField: "age",
+		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.attributes",
+			Usage:      "If provided, only products whose extracted attributes match these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys/values per category.",
+			InnerField: "attributes",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.availability",
+			Usage:      "If provided, only products with these availability statuses will be returned",
+			InnerField: "availability",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.brand-ids",
+			Usage:      "If provided, only products from these brands will be returned",
+			InnerField: "brand_ids",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.category-ids",
+			Usage:      "If provided, only products from these categories will be returned. Accepts category slugs.",
+			InnerField: "category_ids",
+		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.colors",
+			Usage:      "[Beta] Color filter wrapper. Holds required colors and optional match mode.",
+			InnerField: "colors",
+		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "filters.condition",
+			Usage:      "Filter by a single offer condition. Prefer `conditions` when multiple values should match (OR).",
+			InnerField: "condition",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.conditions",
+			Usage:      "Filter by any of these offer conditions (OR). Takes precedence over `condition` when set.",
+			InnerField: "conditions",
+		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.dimensions",
+			Usage:      "Physical-dimension range filters, matched against the same offer.\n\nMatching products have at least one offer satisfying every provided\nrange (alongside any locale/price/availability filters). Values are\ncompared with a small relative tolerance. An offer with no dimension data\nfor a filtered field does not match; note that when a single merchant on a\nproduct reports a dimension it is shared across that product's offers, so a\nmatching offer may not itself surface that dimension in the response.",
+			InnerField: "dimensions",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.exclude-brand-ids",
+			Usage:      "If provided, products from these brands will be excluded from the results",
+			InnerField: "exclude_brand_ids",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.exclude-category-ids",
+			Usage:      "If provided, products in these categories (or their descendants) will be excluded from the results. Accepts category slugs.",
+			InnerField: "exclude_category_ids",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.exclude-website-ids",
+			Usage:      `If provided, products from these websites will be excluded from the results. Accepts website IDs or domains (e.g. "nike.com").`,
+			InnerField: "exclude_website_ids",
+		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "filters.gender",
+			Usage:      `Allowed values: "male", "female".`,
+			InnerField: "gender",
+		},
+		&requestflag.InnerFlag[map[string]any]{
+			Name:       "filters.price",
+			Usage:      "Price filter for search. Values are inclusive.",
+			InnerField: "price",
+		},
+		&requestflag.InnerFlag[*string]{
+			Name:       "filters.sale",
+			Usage:      "If 'on_sale', only products with at least one on-sale offer (priced below its compare-at price) for the requested locale are returned. If omitted, no filter.",
+			InnerField: "sale",
+		},
+		&requestflag.InnerFlag[any]{
+			Name:       "filters.website-ids",
+			Usage:      `If provided, only products from these websites will be returned. Accepts website IDs or domains (e.g. "nike.com").`,
+			InnerField: "website_ids",
 		},
 	},
 	"image": {
