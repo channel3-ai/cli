@@ -21,7 +21,7 @@ func TestResponsesCreate(t *testing.T) {
 			"--context", "{application_context: application_context, user_context: user_context}",
 			"--conversation-id", "conversation_id",
 			"--debug=true",
-			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}], match: strict}, condition: new, conditions: [new], dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
+			"--filters", "{age: [newborn], attributes: {foo: [string]}, availability: [InStock], brand_ids: [string], category_ids: [string], colors: {palette: [{hex: hex, percentage: 0}], match: strict}, conditions: [new], dimensions: {height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}, exclude_brand_ids: [string], exclude_category_ids: [string], exclude_website_ids: [string], gender: male, price: {max_price: 0, min_price: 0}, sale: on_sale, website_ids: [string]}",
 			"--image", "{base64: base64, url: url}",
 			"--message", "{role: role, parts: [{type: text, input: {foo: bar}, modelOnly: true, output: {foo: bar}, suggestedReplies: [string], text: text, toolCallId: toolCallId, toolName: toolName, url: url}]}",
 			"--message", "{role: role, parts: [{type: text, input: {foo: bar}, modelOnly: true, output: {foo: bar}, suggestedReplies: [string], text: text, toolCallId: toolCallId, toolName: toolName, url: url}]}",
@@ -51,7 +51,6 @@ func TestResponsesCreate(t *testing.T) {
 			"--filters.brand-ids", "[string]",
 			"--filters.category-ids", "[string]",
 			"--filters.colors", "{palette: [{hex: hex, percentage: 0}], match: strict}",
-			"--filters.condition", "new",
 			"--filters.conditions", "[new]",
 			"--filters.dimensions", "{height: {unit: mm, max: 0, min: 0}, length: {unit: mm, max: 0, min: 0}, weight: {unit: mg, max: 0, min: 0}, width: {unit: mm, max: 0, min: 0}}",
 			"--filters.exclude-brand-ids", "[string]",
@@ -99,7 +98,6 @@ func TestResponsesCreate(t *testing.T) {
 			"      - hex: hex\n" +
 			"        percentage: 0\n" +
 			"    match: strict\n" +
-			"  condition: new\n" +
 			"  conditions:\n" +
 			"    - new\n" +
 			"  dimensions:\n" +

@@ -64,21 +64,6 @@ var brandsList = cli.Command{
 	HideHelpCommand: true,
 }
 
-var brandsFind = cli.Command{
-	Name:    "find",
-	Usage:   "Find a brand by name.",
-	Suggest: true,
-	Flags: []cli.Flag{
-		&requestflag.Flag[string]{
-			Name:      "query",
-			Required:  true,
-			QueryPath: "query",
-		},
-	},
-	Action:          handleBrandsFind,
-	HideHelpCommand: true,
-}
-
 var brandsSearch = cli.Command{
 	Name:    "search",
 	Usage:   "Search brands by free-text query.",
@@ -208,47 +193,6 @@ func handleBrandsList(ctx context.Context, cmd *cli.Command) error {
 			Transform:      transform,
 		})
 	}
-}
-
-func handleBrandsFind(ctx context.Context, cmd *cli.Command) error {
-	client := channel3go.NewClient(getDefaultRequestOptions(cmd)...)
-	unusedArgs := cmd.Args().Slice()
-
-	if len(unusedArgs) > 0 {
-		return fmt.Errorf("Unexpected extra arguments: %v", unusedArgs)
-	}
-
-	options, err := flagOptions(
-		cmd,
-		apiquery.NestedQueryFormatBrackets,
-		apiquery.ArrayQueryFormatComma,
-		EmptyBody,
-		false,
-	)
-	if err != nil {
-		return err
-	}
-
-	params := channel3go.BrandFindParams{}
-
-	var res []byte
-	options = append(options, option.WithResponseBodyInto(&res))
-	_, err = client.Brands.Find(ctx, params, options...)
-	if err != nil {
-		return err
-	}
-
-	obj := gjson.ParseBytes(res)
-	format := cmd.Root().String("format")
-	explicitFormat := cmd.Root().IsSet("format")
-	transform := cmd.Root().String("transform")
-	return ShowJSON(obj, ShowJSONOpts{
-		ExplicitFormat: explicitFormat,
-		Format:         format,
-		RawOutput:      cmd.Root().Bool("raw-output"),
-		Title:          "brands find",
-		Transform:      transform,
-	})
 }
 
 func handleBrandsSearch(ctx context.Context, cmd *cli.Command) error {

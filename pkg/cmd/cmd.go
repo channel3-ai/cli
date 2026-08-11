@@ -146,7 +146,6 @@ func init() {
 				Commands: []*cli.Command{
 					&brandsRetrieve,
 					&brandsList,
-					&brandsFind,
 					&brandsSearch,
 				},
 			},
@@ -209,14 +208,6 @@ func init() {
 				Suggest:  true,
 				Commands: []*cli.Command{
 					&searchPerform,
-				},
-			},
-			{
-				Name:     "enrich",
-				Category: "API RESOURCE",
-				Suggest:  true,
-				Commands: []*cli.Command{
-					&enrichEnrichURL,
 				},
 			},
 			{

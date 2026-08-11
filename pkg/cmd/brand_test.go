@@ -36,18 +36,6 @@ func TestBrandsList(t *testing.T) {
 	})
 }
 
-func TestBrandsFind(t *testing.T) {
-	t.Skip("Mock server tests are disabled")
-	t.Run("regular flags", func(t *testing.T) {
-		mocktest.TestRunMockTestWithFlags(
-			t,
-			"--api-key", "string",
-			"brands", "find",
-			"--query", "query",
-		)
-	})
-}
-
 func TestBrandsSearch(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	t.Run("regular flags", func(t *testing.T) {

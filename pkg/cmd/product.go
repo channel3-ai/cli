@@ -109,9 +109,9 @@ var productsBrowse = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "If provided, only products whose extracted attributes match these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys/values per category.",
 			InnerField: "attributes",
 		},
-		&requestflag.InnerFlag[any]{
+		&requestflag.InnerFlag[[]string]{
 			Name:       "filters.availability",
-			Usage:      "If provided, only products with these availability statuses will be returned",
+			Usage:      "Offer availability statuses to match (OR). Defaults to ['InStock']. An offer with no availability data counts as 'InStock'. Pass every value to disable availability filtering.",
 			InnerField: "availability",
 		},
 		&requestflag.InnerFlag[any]{
@@ -129,14 +129,9 @@ var productsBrowse = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "[Beta] Color filter wrapper. Holds required colors and optional match mode.",
 			InnerField: "colors",
 		},
-		&requestflag.InnerFlag[*string]{
-			Name:       "filters.condition",
-			Usage:      "Filter by a single offer condition. Prefer `conditions` when multiple values should match (OR).",
-			InnerField: "condition",
-		},
-		&requestflag.InnerFlag[any]{
+		&requestflag.InnerFlag[[]string]{
 			Name:       "filters.conditions",
-			Usage:      "Filter by any of these offer conditions (OR). Takes precedence over `condition` when set.",
+			Usage:      "Offer conditions to match (OR). Defaults to ['new'], which also matches offers whose condition is unknown. Pass every value to disable condition filtering.",
 			InnerField: "conditions",
 		},
 		&requestflag.InnerFlag[map[string]any]{
@@ -161,7 +156,7 @@ var productsBrowse = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.gender",
-			Usage:      `Allowed values: "male", "female".`,
+			Usage:      "Product gender. 'unisex' is deprecated: coerced to None on input, never emitted.",
 			InnerField: "gender",
 		},
 		&requestflag.InnerFlag[map[string]any]{
@@ -230,17 +225,17 @@ var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 	"config": {
 		&requestflag.InnerFlag[*string]{
 			Name:       "config.country",
-			Usage:      "ISO 3166-1 alpha-2 country code. May stay unset for pan-region storefronts (e.g. ``currency=EUR`` with no specific country).",
+			Usage:      "ISO 3166-1 alpha-2 country code (plus the pan-region ``EU``).",
 			InnerField: "country",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "config.currency",
-			Usage:      "ISO 4217 currency code. When unset, inferred from ``country`` (e.g. ``GB`` → ``GBP``), defaulting to ``USD``.",
+			Usage:      "ISO 4217 currency code.",
 			InnerField: "currency",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "config.language",
-			Usage:      "ISO 639-1 language code. When unset, inferred from ``country`` (preferred) then ``currency``, defaulting to ``en``.",
+			Usage:      "ISO 639-1 language code.",
 			InnerField: "language",
 		},
 		&requestflag.InnerFlag[*string]{
@@ -265,9 +260,9 @@ var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "If provided, only products whose extracted attributes match these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys/values per category.",
 			InnerField: "attributes",
 		},
-		&requestflag.InnerFlag[any]{
+		&requestflag.InnerFlag[[]string]{
 			Name:       "filters.availability",
-			Usage:      "If provided, only products with these availability statuses will be returned",
+			Usage:      "Offer availability statuses to match (OR). Defaults to ['InStock']. An offer with no availability data counts as 'InStock'. Pass every value to disable availability filtering.",
 			InnerField: "availability",
 		},
 		&requestflag.InnerFlag[any]{
@@ -285,14 +280,9 @@ var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "[Beta] Color filter wrapper. Holds required colors and optional match mode.",
 			InnerField: "colors",
 		},
-		&requestflag.InnerFlag[*string]{
-			Name:       "filters.condition",
-			Usage:      "Filter by a single offer condition. Prefer `conditions` when multiple values should match (OR).",
-			InnerField: "condition",
-		},
-		&requestflag.InnerFlag[any]{
+		&requestflag.InnerFlag[[]string]{
 			Name:       "filters.conditions",
-			Usage:      "Filter by any of these offer conditions (OR). Takes precedence over `condition` when set.",
+			Usage:      "Offer conditions to match (OR). Defaults to ['new'], which also matches offers whose condition is unknown. Pass every value to disable condition filtering.",
 			InnerField: "conditions",
 		},
 		&requestflag.InnerFlag[map[string]any]{
@@ -317,7 +307,7 @@ var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.gender",
-			Usage:      `Allowed values: "male", "female".`,
+			Usage:      "Product gender. 'unisex' is deprecated: coerced to None on input, never emitted.",
 			InnerField: "gender",
 		},
 		&requestflag.InnerFlag[map[string]any]{
@@ -443,22 +433,17 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 	"config": {
 		&requestflag.InnerFlag[*string]{
 			Name:       "config.country",
-			Usage:      "ISO 3166-1 alpha-2 country code. May stay unset for pan-region storefronts (e.g. ``currency=EUR`` with no specific country).",
+			Usage:      "ISO 3166-1 alpha-2 country code (plus the pan-region ``EU``).",
 			InnerField: "country",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "config.currency",
-			Usage:      "ISO 4217 currency code. When unset, inferred from ``country`` (e.g. ``GB`` → ``GBP``), defaulting to ``USD``.",
+			Usage:      "ISO 4217 currency code.",
 			InnerField: "currency",
-		},
-		&requestflag.InnerFlag[bool]{
-			Name:       "config.keyword-search-only",
-			Usage:      "Deprecated: use `mode`. `true` is equivalent to `mode=keyword`. ",
-			InnerField: "keyword_search_only",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "config.language",
-			Usage:      "ISO 639-1 language code. When unset, inferred from ``country`` (preferred) then ``currency``, defaulting to ``en``.",
+			Usage:      "ISO 639-1 language code.",
 			InnerField: "language",
 		},
 		&requestflag.InnerFlag[*string]{
@@ -488,9 +473,9 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "If provided, only products whose extracted attributes match these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys/values per category.",
 			InnerField: "attributes",
 		},
-		&requestflag.InnerFlag[any]{
+		&requestflag.InnerFlag[[]string]{
 			Name:       "filters.availability",
-			Usage:      "If provided, only products with these availability statuses will be returned",
+			Usage:      "Offer availability statuses to match (OR). Defaults to ['InStock']. An offer with no availability data counts as 'InStock'. Pass every value to disable availability filtering.",
 			InnerField: "availability",
 		},
 		&requestflag.InnerFlag[any]{
@@ -508,14 +493,9 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "[Beta] Color filter wrapper. Holds required colors and optional match mode.",
 			InnerField: "colors",
 		},
-		&requestflag.InnerFlag[*string]{
-			Name:       "filters.condition",
-			Usage:      "Filter by a single offer condition. Prefer `conditions` when multiple values should match (OR).",
-			InnerField: "condition",
-		},
-		&requestflag.InnerFlag[any]{
+		&requestflag.InnerFlag[[]string]{
 			Name:       "filters.conditions",
-			Usage:      "Filter by any of these offer conditions (OR). Takes precedence over `condition` when set.",
+			Usage:      "Offer conditions to match (OR). Defaults to ['new'], which also matches offers whose condition is unknown. Pass every value to disable condition filtering.",
 			InnerField: "conditions",
 		},
 		&requestflag.InnerFlag[map[string]any]{
@@ -540,7 +520,7 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.gender",
-			Usage:      `Allowed values: "male", "female".`,
+			Usage:      "Product gender. 'unisex' is deprecated: coerced to None on input, never emitted.",
 			InnerField: "gender",
 		},
 		&requestflag.InnerFlag[map[string]any]{
@@ -618,17 +598,17 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 	"config": {
 		&requestflag.InnerFlag[*string]{
 			Name:       "config.country",
-			Usage:      "ISO 3166-1 alpha-2 country code. May stay unset for pan-region storefronts (e.g. ``currency=EUR`` with no specific country).",
+			Usage:      "ISO 3166-1 alpha-2 country code (plus the pan-region ``EU``).",
 			InnerField: "country",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "config.currency",
-			Usage:      "ISO 4217 currency code. When unset, inferred from ``country`` (e.g. ``GB`` → ``GBP``), defaulting to ``USD``.",
+			Usage:      "ISO 4217 currency code.",
 			InnerField: "currency",
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "config.language",
-			Usage:      "ISO 639-1 language code. When unset, inferred from ``country`` (preferred) then ``currency``, defaulting to ``en``.",
+			Usage:      "ISO 639-1 language code.",
 			InnerField: "language",
 		},
 		&requestflag.InnerFlag[*string]{
@@ -653,9 +633,9 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "If provided, only products whose extracted attributes match these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys/values per category.",
 			InnerField: "attributes",
 		},
-		&requestflag.InnerFlag[any]{
+		&requestflag.InnerFlag[[]string]{
 			Name:       "filters.availability",
-			Usage:      "If provided, only products with these availability statuses will be returned",
+			Usage:      "Offer availability statuses to match (OR). Defaults to ['InStock']. An offer with no availability data counts as 'InStock'. Pass every value to disable availability filtering.",
 			InnerField: "availability",
 		},
 		&requestflag.InnerFlag[any]{
@@ -673,14 +653,9 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 			Usage:      "[Beta] Color filter wrapper. Holds required colors and optional match mode.",
 			InnerField: "colors",
 		},
-		&requestflag.InnerFlag[*string]{
-			Name:       "filters.condition",
-			Usage:      "Filter by a single offer condition. Prefer `conditions` when multiple values should match (OR).",
-			InnerField: "condition",
-		},
-		&requestflag.InnerFlag[any]{
+		&requestflag.InnerFlag[[]string]{
 			Name:       "filters.conditions",
-			Usage:      "Filter by any of these offer conditions (OR). Takes precedence over `condition` when set.",
+			Usage:      "Offer conditions to match (OR). Defaults to ['new'], which also matches offers whose condition is unknown. Pass every value to disable condition filtering.",
 			InnerField: "conditions",
 		},
 		&requestflag.InnerFlag[map[string]any]{
@@ -705,7 +680,7 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[*string]{
 			Name:       "filters.gender",
-			Usage:      `Allowed values: "male", "female".`,
+			Usage:      "Product gender. 'unisex' is deprecated: coerced to None on input, never emitted.",
 			InnerField: "gender",
 		},
 		&requestflag.InnerFlag[map[string]any]{
