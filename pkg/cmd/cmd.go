@@ -188,6 +188,15 @@ func init() {
 				},
 			},
 			{
+				Name:     "conversations:client-tokens",
+				Category: "API RESOURCE",
+				Suggest:  true,
+				Commands: []*cli.Command{
+					&conversationsClientTokensCreate,
+					&conversationsClientTokensRevoke,
+				},
+			},
+			{
 				Name:     "search",
 				Category: "API RESOURCE",
 				Suggest:  true,

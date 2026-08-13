@@ -31,7 +31,7 @@ var conversationsCreate = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.Flag[*string]{
 			Name:     "conversation-id",
-			Usage:    "Existing thread to continue; when omitted, a new thread is created.",
+			Usage:    "Existing thread to continue. When omitted, a new thread is created and its id returned.",
 			BodyPath: "conversation_id",
 		},
 		&requestflag.Flag[map[string]any]{
