@@ -15,8 +15,7 @@ func TestConversationsClientTokensCreate(t *testing.T) {
 			t,
 			"--api-key", "string",
 			"conversations:client-tokens", "create",
-			"--conversation-id", "conversation_id",
-			"--session-id", "session_id",
+			"--conversation-id", "x",
 			"--ttl-seconds", "60",
 		)
 	})
@@ -24,8 +23,7 @@ func TestConversationsClientTokensCreate(t *testing.T) {
 	t.Run("piping data", func(t *testing.T) {
 		// Test piping YAML data over stdin
 		pipeData := []byte("" +
-			"conversation_id: conversation_id\n" +
-			"session_id: session_id\n" +
+			"conversation_id: x\n" +
 			"ttl_seconds: 60\n")
 		mocktest.TestRunMockTestWithPipeAndFlags(
 			t, pipeData,

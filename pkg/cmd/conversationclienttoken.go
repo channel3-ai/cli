@@ -16,16 +16,12 @@ import (
 
 var conversationsClientTokensCreate = cli.Command{
 	Name:    "create",
-	Usage:   "Mint a short-lived, browser-safe client token for the conversations API. Pass\n`session_id` for a session token that can create and continue conversations for\nthat session, or `conversation_id` for a token bound to one existing\nconversation.",
+	Usage:   "Mint a short-lived, browser-safe token. With `conversation_id` the token\ncontinues and reads that thread; without it, the token's first turn creates the\nthread and binds the token to it.",
 	Suggest: true,
 	Flags: []cli.Flag{
 		&requestflag.Flag[*string]{
 			Name:     "conversation-id",
 			BodyPath: "conversation_id",
-		},
-		&requestflag.Flag[*string]{
-			Name:     "session-id",
-			BodyPath: "session_id",
 		},
 		&requestflag.Flag[int64]{
 			Name:     "ttl-seconds",
