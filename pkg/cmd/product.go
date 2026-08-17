@@ -106,7 +106,7 @@ var productsBrowse = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "filters.attributes",
-			Usage:      "If provided, only products whose extracted attributes match these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys/values per category.",
+			Usage:      "If provided, only products matching these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys and values per category.",
 			InnerField: "attributes",
 		},
 		&requestflag.InnerFlag[[]string]{
@@ -257,7 +257,7 @@ var productsFindSimilar = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "filters.attributes",
-			Usage:      "If provided, only products whose extracted attributes match these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys/values per category.",
+			Usage:      "If provided, only products matching these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys and values per category.",
 			InnerField: "attributes",
 		},
 		&requestflag.InnerFlag[[]string]{
@@ -470,7 +470,7 @@ var productsSearch = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "filters.attributes",
-			Usage:      "If provided, only products whose extracted attributes match these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys/values per category.",
+			Usage:      "If provided, only products matching these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys and values per category.",
 			InnerField: "attributes",
 		},
 		&requestflag.InnerFlag[[]string]{
@@ -630,7 +630,7 @@ var productsSearchByImage = requestflag.WithInnerFlags(cli.Command{
 		},
 		&requestflag.InnerFlag[map[string]any]{
 			Name:       "filters.attributes",
-			Usage:      "If provided, only products whose extracted attributes match these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys/values per category.",
+			Usage:      "If provided, only products matching these key/value constraints will be returned. Keys are attribute handles (e.g. 'color', 'material') and values are lists of allowed values (OR within a key, AND across keys). When a category filter is also supplied, all keys must be valid attributes of at least one of the requested categories. See `Category.attributes` for the valid keys and values per category.",
 			InnerField: "attributes",
 		},
 		&requestflag.InnerFlag[[]string]{
